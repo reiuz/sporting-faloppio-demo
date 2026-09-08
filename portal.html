@@ -129,8 +129,9 @@ button{font-family:inherit}
 .grid{display:grid;gap:18px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow)}
 .card.pad-lg{padding:28px}
-.card-h{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.card-h{display:flex;align-items:center;gap:10px 12px;margin-bottom:16px;flex-wrap:wrap}
 .card-h h3{font-size:1.15rem}
+.card-h .eyebadge{white-space:nowrap}
 .card-h .sub{font-size:13px;color:var(--faint);font-family:"JetBrains Mono"}
 .card-h .spacer{margin-left:auto}
 .eyebadge{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
@@ -147,6 +148,8 @@ button{font-family:inherit}
 .span7{grid-column:span 7}.span8{grid-column:span 8}.span12{grid-column:span 12}
 @media(max-width:900px){.span3{grid-column:span 3}.span4,.span5,.span7,.span8{grid-column:span 6}.span6{grid-column:span 6}}
 @media(max-width:560px){.span3,.span4,.span5,.span6,.span7,.span8,.span12{grid-column:span 2}}
+@media(max-width:560px){.span3{grid-column:span 1}}
+@media(max-width:820px){#matchGrid{grid-template-columns:1fr!important}}
 .hero-card{background:linear-gradient(135deg,var(--night),var(--night-2));color:#fff;border:0;position:relative;overflow:hidden}
 .hero-card::after{content:"";position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;
   background:radial-gradient(circle,oklch(0.56 0.17 40 / .5),transparent 70%)}
@@ -275,7 +278,7 @@ button{font-family:inherit}
 .bars .bar small{font-family:"JetBrains Mono";font-size:11px;color:var(--faint)}
 .donut-wrap{display:flex;align-items:center;gap:22px}
 .donut{width:130px;height:130px;flex:0 0 auto;position:relative}
-.donut .val{position:absolute;inset:0;display:grid;place-items:center;flex-direction:column;text-align:center}
+.donut .val{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.1}
 .donut .val b{font-family:"Bricolage Grotesque";font-weight:800;font-size:1.8rem;line-height:1}
 .donut .val span{font-size:11px;color:var(--muted)}
 .leg-list{display:flex;flex-direction:column;gap:11px;font-size:13.5px}
@@ -334,13 +337,14 @@ input[type=range]{width:100%;accent-color:var(--clay)}
 /* bottom nav (mobile) */
 .botnav{display:none}
 @media(max-width:900px){
-  .botnav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:60;background:oklch(1 0 0 / .92);backdrop-filter:blur(16px);
-    border-top:1px solid var(--line);padding:8px 6px calc(8px + env(safe-area-inset-bottom));justify-content:space-around}
+  .botnav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:60;background:var(--card);
+    border-top:1px solid var(--line);box-shadow:0 -8px 24px -12px rgba(20,22,40,.25);
+    padding:8px 6px calc(10px + env(safe-area-inset-bottom));justify-content:space-around}
   .botnav button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--faint);
     font-size:10px;font-weight:600;cursor:pointer;padding:5px 8px;border-radius:10px;flex:1}
   .botnav button svg{width:22px;height:22px}
   .botnav button.on{color:var(--clay)}
-  .content{padding-bottom:76px}
+  .content{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
 </style>
@@ -594,7 +598,7 @@ input[type=range]{width:100%;accent-color:var(--clay)}
         <div class="card pad-lg">
           <div class="avatar-lg" id="pfAv">FL</div>
           <h3 style="font-size:1.4rem" id="pfName">Fabio La Ganga</h3>
-          <p style="color:var(--muted);font-size:14px" id="pfNick">"ClayKing" · racchetta Dunlop FX 500</p>
+          <p style="color:var(--muted);font-size:14px;margin-top:8px" id="pfNick">"reiuz" · racchetta Dunlop FX 500</p>
           <div class="lvl-panel">
             <span class="eyebadge eb-court" data-i18n="pf_lvltitle">Il tuo livello</span>
             <div class="lvl-two" style="margin-top:14px">
@@ -613,7 +617,7 @@ input[type=range]{width:100%;accent-color:var(--clay)}
             <div class="field"><label data-i18n="pf_name">Nome</label><input id="i_name" value="Fabio"></div>
             <div class="field"><label data-i18n="pf_surname">Cognome</label><input id="i_surname" value="La Ganga"></div>
           </div>
-          <div class="field"><label data-i18n="pf_nick">Nickname</label><input id="i_nick" value="ClayKing"></div>
+          <div class="field"><label data-i18n="pf_nick">Nickname</label><input id="i_nick" value="reiuz"></div>
           <div class="field"><label data-i18n="pf_racket">Racchetta</label>
             <select id="i_racket">
               <option>Dunlop FX 500</option><option>Dunlop CX 200</option><option>Dunlop SX 300</option>
@@ -741,7 +745,7 @@ const players=[
   {n:"Matteo B.",tag:"TheWall",elo:1584,form:"WWWWW",streak:5,d:+22,lvl:3.4,c:"var(--clay)"},
   {n:"Luca F.",tag:"Lefty",elo:1542,form:"WWLWW",streak:2,d:+8,lvl:3.3,c:"var(--court)"},
   {n:"Sara G.",tag:"Ace",elo:1519,form:"WLWWL",streak:1,d:+14,lvl:3.1,c:"var(--gold-ink)"},
-  {n:"Fabio La Ganga",tag:"ClayKing",elo:1502,form:"WWLWW",streak:7,d:+18,lvl:3.2,c:"var(--clay-deep)",me:true},
+  {n:"Fabio La Ganga",tag:"reiuz",elo:1502,form:"WWLWW",streak:7,d:+18,lvl:3.2,c:"var(--clay-deep)",me:true},
   {n:"Andrea P.",tag:"Topspin",elo:1478,form:"LWWLW",streak:0,d:-6,lvl:3.0,c:"var(--court-deep)"},
   {n:"Giulia R.",tag:"Netrush",elo:1450,form:"WLLWW",streak:1,d:+4,lvl:2.9,c:"var(--clay)"},
   {n:"Davide M.",tag:"Slice",elo:1421,form:"LLWLW",streak:0,d:-11,lvl:2.8,c:"var(--court)"},
@@ -858,7 +862,7 @@ function renderHeat(){const h=document.getElementById('heatmap');h.innerHTML='';
 }
 function cell(txt,head,center){const d=document.createElement('div');d.className=head?'hd':'cell';if(center)d.style.textAlign='center';d.textContent=txt;return d;}
 /* active table */
-const active=[["Matteo B.","TheWall","var(--clay)",22,31],["Fabio La Ganga","ClayKing","var(--clay-deep)",19,28,true],["Sara G.","Ace","var(--gold-ink)",18,25],["Luca F.","Lefty","var(--court)",16,22],["Giulia R.","Netrush","var(--clay)",14,19]];
+const active=[["Matteo B.","TheWall","var(--clay)",22,31],["Fabio La Ganga","reiuz","var(--clay-deep)",19,28,true],["Sara G.","Ace","var(--gold-ink)",18,25],["Luca F.","Lefty","var(--court)",16,22],["Giulia R.","Netrush","var(--clay)",14,19]];
 function renderActive(){const tb=document.querySelector('#activeTable tbody');tb.innerHTML='';
   active.forEach((p,i)=>{const tr=document.createElement('tr');if(p[5])tr.className='me';
     tr.innerHTML=`<td class="rk ${i<3?'top':''}">${i+1}</td>
