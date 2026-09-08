@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sporting Faloppio — 100% Tennis & Sport</title>
+<meta name="description" content="Circolo tennis a Faloppio (CO). Due campi indoor sotto il pallone e uno all'aperto in resina color terra, scuola tennis FITP, summer camp e tornei interni D-Match.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:oklch(1 0 0);
+  --surface:oklch(0.985 0.004 250);
+  --surface-2:oklch(0.965 0.006 250);
+  --ink:oklch(0.22 0.02 265);
+  --muted:oklch(0.46 0.02 265);
+  --faint:oklch(0.62 0.015 265);
+  --line:oklch(0.90 0.005 265);
+  --line-2:oklch(0.83 0.006 265);
+  --clay:oklch(0.56 0.17 40);
+  --clay-deep:oklch(0.45 0.15 38);
+  --clay-wash:oklch(0.96 0.03 45);
+  --court:oklch(0.42 0.09 155);
+  --court-deep:oklch(0.30 0.07 155);
+  --gold:oklch(0.80 0.14 88);
+  --gold-ink:oklch(0.52 0.11 80);
+  --night:oklch(0.20 0.03 260);
+  --maxw:1180px;
+  --gut:clamp(20px,5vw,64px);
+  --r:16px;
+  --r-lg:26px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --ease-quint:cubic-bezier(.22,1,.36,1);
+  --shadow:0 1px 2px rgba(20,22,40,.04),0 12px 30px -12px rgba(20,22,40,.14);
+  --shadow-lg:0 2px 6px rgba(20,22,40,.05),0 30px 60px -22px rgba(20,22,40,.28);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{margin:0;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;line-height:1.02;letter-spacing:-.025em;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gut)}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+
+/* scroll progress */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:200;background:linear-gradient(90deg,var(--clay),var(--gold));transition:width .1s linear}
+
+/* ---- buttons ---- */
+.btn{display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:15px;white-space:nowrap;
+  padding:14px 24px;border-radius:100px;border:1.5px solid transparent;cursor:pointer;
+  transition:transform .45s var(--ease),background .3s,color .3s,border-color .3s,box-shadow .3s;line-height:1}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--clay);color:#fff;box-shadow:0 10px 24px -10px oklch(0.56 0.17 40 / .7)}
+.btn-primary:hover{background:var(--clay-deep);transform:translateY(-2px);box-shadow:0 16px 34px -12px oklch(0.56 0.17 40 / .85)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:#000;transform:translateY(-2px)}
+.btn-lg{padding:17px 30px;font-size:16px}
+.btn .arw{transition:transform .45s var(--ease)}
+.btn:hover .arw{transform:translateX(4px)}
+
+/* ---- header ---- */
+header{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .4s var(--ease),box-shadow .4s,border-color .4s;border-bottom:1px solid transparent}
+header.scrolled{background:oklch(1 0 0 / .82);backdrop-filter:blur(16px) saturate(1.4);border-bottom-color:var(--line)}
+.nav{display:flex;align-items:center;gap:22px;min-height:78px;flex-wrap:nowrap}
+.brand{display:flex;align-items:center;gap:12px;margin-right:auto;min-width:0;flex-shrink:1}
+.nav-actions{flex-shrink:0}
+.brand .name b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand svg{width:40px;height:40px;flex:0 0 auto}
+.brand .name{display:flex;flex-direction:column;line-height:1}
+.brand .name b{font-family:"Bricolage Grotesque";font-weight:800;font-size:19px;letter-spacing:-.02em;color:#fff;transition:color .4s}
+.brand .name span{font-family:"JetBrains Mono";font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-top:3px;transition:color .4s}
+header.scrolled .brand .name b{color:var(--ink)}
+header.scrolled .brand .name span{color:var(--clay)}
+.navlinks{display:flex;gap:26px;align-items:center}
+.navlinks a{font-size:14.5px;font-weight:500;color:oklch(1 0 0 / .85);position:relative;transition:color .3s;padding:4px 0}
+.navlinks a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--clay);transition:width .4s var(--ease)}
+.navlinks a:hover{color:#fff}.navlinks a:hover::after{width:100%}
+header.scrolled .navlinks a{color:var(--muted)}
+header.scrolled .navlinks a:hover{color:var(--ink)}
+.navlinks .cta-mobile{display:none}
+.navlinks .lang-mobile{display:none}
+.nav-actions{display:flex;align-items:center;gap:14px}
+.lang{display:inline-flex;border:1.5px solid oklch(1 0 0 / .35);border-radius:100px;overflow:hidden;font-family:"JetBrains Mono";font-size:12px;font-weight:700;transition:border-color .4s}
+header.scrolled .lang{border-color:var(--line-2)}
+.lang button{background:transparent;border:0;color:oklch(1 0 0 / .8);padding:7px 11px;cursor:pointer;transition:background .3s,color .3s}
+header.scrolled .lang button{color:var(--faint)}
+.lang button.on{background:#fff;color:var(--ink)}
+header.scrolled .lang button.on{background:var(--ink);color:#fff}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+.burger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.4s var(--ease)}
+header.scrolled .burger span{background:var(--ink)}
+@media(max-width:960px){
+  .navlinks{position:fixed;inset:78px 0 auto 0;flex-direction:column;gap:0;background:var(--bg);
+    border-bottom:1px solid var(--line);padding:8px var(--gut) 24px;transform:translateY(-120%);opacity:0;
+    transition:transform .5s var(--ease),opacity .3s;pointer-events:none;box-shadow:var(--shadow)}
+  .navlinks.open{transform:translateY(0);opacity:1;pointer-events:auto}
+  .navlinks a{width:100%;padding:15px 0;border-bottom:1px solid var(--line);font-size:17px;color:var(--ink)!important}
+  .navlinks a::after{display:none}
+  .navlinks .cta-mobile{display:inline-flex;border:0;margin-top:16px;color:#fff!important;justify-content:center}
+  .burger{display:flex;background:oklch(0.18 0.03 260 / .42);border-radius:10px;padding:9px 8px;backdrop-filter:blur(4px)}
+  header.scrolled .burger{background:var(--surface-2);backdrop-filter:none}
+  .nav .cta-desktop{display:none}
+}
+@media(max-width:560px){
+  .nav{gap:12px}
+  .brand{gap:9px}
+  .brand svg{width:34px;height:34px}
+  .brand .name b{font-size:17px}
+  .brand .name span{display:none}
+  .nav-actions .lang{display:none}
+  .navlinks .lang-mobile{display:inline-flex;align-self:center;margin-top:18px;border-color:var(--line-2)}
+  .lang-mobile button{color:var(--faint)}
+  .lang-mobile button.on{background:var(--ink);color:#fff}
+  .hero-cta{flex-direction:column;align-items:stretch;gap:10px}
+  .hero-cta .btn{width:100%;justify-content:center}
+}
+
+/* ---- hero ---- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:-6% 0 -6% 0;z-index:-2;overflow:hidden}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 35%;will-change:transform}
+.hero.prep .hero-bg img{transform:scale(1.16)}
+.hero.play .hero-bg img{transform:scale(1);transition:transform 7s cubic-bezier(.2,.6,.2,1)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,oklch(0.16 0.03 260 / .55) 0%,oklch(0.16 0.03 260 / .12) 32%,oklch(0.16 0.03 260 / .35) 62%,oklch(0.14 0.03 260 / .94) 100%)}
+.hero-inner{width:100%;padding-block:150px clamp(44px,8vh,96px)}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:"JetBrains Mono";font-size:12px;
+  letter-spacing:.18em;text-transform:uppercase;color:#fff;background:oklch(1 0 0 / .1);border:1px solid oklch(1 0 0 / .24);
+  padding:9px 16px;border-radius:100px;backdrop-filter:blur(6px)}
+.hero .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold);animation:glow 2.4s ease-in-out infinite}
+@keyframes glow{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{color:#fff;font-size:clamp(2.9rem,10vw,6rem);margin:22px 0 0;max-width:15ch;text-shadow:0 4px 44px rgba(0,0,0,.34)}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.04em}
+.hero h1 .ln>span{display:block}
+.hero h1 em{font-style:normal;-webkit-text-fill-color:oklch(0.72 0.19 44);color:oklch(0.72 0.19 44)}
+.hero .lede{color:oklch(0.95 0.01 250);font-size:clamp(17px,2.3vw,21px);max-width:54ch;margin-top:24px;text-wrap:pretty}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.hero .btn-ghost{color:#fff;border-color:oklch(1 0 0 / .45);backdrop-filter:blur(4px)}
+.hero .btn-ghost:hover{border-color:#fff;background:oklch(1 0 0 / .12)}
+/* hero entrance: content is visible by default; .prep sets the pre-frame, .play animates in */
+.hero.prep h1 .ln>span{transform:translateY(115%)}
+.hero.prep .eyebrow,.hero.prep .lede,.hero.prep .hero-cta,.hero.prep .scrollcue{opacity:0;transform:translateY(22px)}
+.hero.play h1 .ln>span{transform:translateY(0);transition:transform 1s var(--ease-quint)}
+.hero.play h1 .ln:nth-child(1)>span{transition-delay:.12s}
+.hero.play h1 .ln:nth-child(2)>span{transition-delay:.25s}
+.hero.play h1 .ln:nth-child(3)>span{transition-delay:.38s}
+.hero.play .eyebrow{opacity:1;transform:none;transition:opacity .8s,transform .8s var(--ease-quint)}
+.hero.play .lede{opacity:1;transform:none;transition:opacity .8s .5s,transform .8s .5s var(--ease-quint)}
+.hero.play .hero-cta{opacity:1;transform:none;transition:opacity .8s .64s,transform .8s .64s var(--ease-quint)}
+.hero.play .scrollcue{opacity:1;transform:translateX(-50%);transition:opacity 1s 1.1s}
+.scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;color:oklch(1 0 0 / .7);
+  font-family:"JetBrains Mono";font-size:10px;letter-spacing:.24em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
+.scrollcue .line{width:1px;height:34px;background:linear-gradient(oklch(1 0 0 / 0),oklch(1 0 0 / .8));animation:cue 2.4s var(--ease) infinite}
+@keyframes cue{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}50.1%{transform-origin:bottom}100%{transform:scaleY(.2);transform-origin:bottom}}
+
+/* ---- stat strip ---- */
+.stats{background:var(--ink);color:#fff;position:relative;z-index:3}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:oklch(1 0 0 / .1)}
+.stat{background:var(--ink);padding:34px var(--gut)}
+.stat .num{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(2.2rem,5vw,3.3rem);letter-spacing:-.03em;line-height:1;color:#fff}
+.stat .num .u{color:var(--gold);font-size:.55em;vertical-align:top;margin-left:1px}
+.stat .lbl{font-size:13.5px;color:oklch(0.78 0.01 250);margin-top:8px}
+@media(max-width:720px){.stats-grid{grid-template-columns:repeat(2,1fr)}.stat{padding:26px var(--gut)}}
+
+/* ---- section shell ---- */
+.sec{padding-block:clamp(72px,11vw,140px)}
+.sec-head{max-width:64ch;margin-bottom:clamp(40px,6vw,68px)}
+.kicker{display:inline-flex;align-items:center;gap:9px;font-family:"JetBrains Mono";font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);font-weight:700;margin-bottom:18px}
+.kicker::before{content:"";width:26px;height:2px;background:var(--clay)}
+h2.big{font-size:clamp(2.1rem,5.2vw,3.6rem)}
+.sec-head p{color:var(--muted);font-size:clamp(16px,1.9vw,19px);margin-top:18px;max-width:56ch;text-wrap:pretty}
+
+/* ---- intro / location ---- */
+.intro{background:var(--surface)}
+.intro-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,72px);align-items:center}
+@media(max-width:860px){.intro-grid{grid-template-columns:1fr}}
+.reveal-img{position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg)}
+.reveal-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease);transform:scale(1.06)}
+.reveal-img.in img{transform:scale(1)}
+.reveal-img::after{content:"";position:absolute;inset:0;background:var(--clay);transform-origin:right;transform:scaleX(1);transition:transform 1s var(--ease-quint)}
+.reveal-img.in::after{transform:scaleX(0)}
+.intro-media{aspect-ratio:4/5}
+.intro-media .tag{position:absolute;left:18px;bottom:18px;z-index:2;background:oklch(1 0 0 / .93);backdrop-filter:blur(8px);border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px}
+.intro-media .tag .pin{width:34px;height:34px;border-radius:10px;background:var(--clay-wash);display:grid;place-items:center;color:var(--clay-deep)}
+.intro-media .tag b{font-size:14px;display:block}.intro-media .tag small{color:var(--muted);font-size:12px}
+.feat-list{display:flex;flex-direction:column;gap:8px;margin-top:30px}
+.feat{display:flex;gap:16px;padding:18px 0;border-top:1px solid var(--line)}
+.feat .ic{flex:0 0 auto;width:42px;height:42px;border-radius:12px;background:var(--clay-wash);color:var(--clay-deep);display:grid;place-items:center}
+.feat h4{font-size:17px;font-family:"Hanken Grotesk";font-weight:700;letter-spacing:0}
+.feat p{color:var(--muted);font-size:14.5px;margin-top:3px}
+
+/* ---- courts ---- */
+.courts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(max-width:760px){.courts-grid{grid-template-columns:1fr}}
+.court-card{position:relative;border-radius:var(--r-lg);overflow:hidden;min-height:360px;display:flex;align-items:flex-end;color:#fff;box-shadow:var(--shadow);isolation:isolate}
+.court-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s var(--ease)}
+.court-card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 28%,oklch(0.18 0.03 260 / .88))}
+.court-card:hover img{transform:scale(1.06)}
+.court-card .cc-body{padding:28px}
+.court-card .badge{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--gold);color:oklch(0.28 0.06 80);padding:6px 12px;border-radius:100px;font-weight:700}
+.court-card h3{font-size:1.9rem;margin-top:14px}
+.court-card p{color:oklch(0.92 0.01 250);font-size:14.5px;margin-top:8px;max-width:36ch}
+.court-card.wide{grid-column:1/-1;min-height:300px}
+@media(max-width:760px){.court-card.wide{grid-column:auto}}
+
+/* ---- activities ---- */
+.acts{background:var(--surface)}
+.acts-list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.act{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(22px,3vw,34px) 0;border-bottom:1px solid var(--line);transition:padding .5s var(--ease)}
+.act:hover{padding-left:14px}
+.act .idx{font-family:"JetBrains Mono";font-size:13px;color:var(--faint);font-weight:700}
+.act .main{display:flex;flex-direction:column;gap:6px}
+.act h3{font-size:clamp(1.4rem,3.2vw,2rem);transition:color .3s}
+.act:hover h3{color:var(--clay)}
+.act .desc{color:var(--muted);font-size:15px;max-width:62ch}
+.act .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.chip{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--court-deep);background:oklch(0.95 0.03 155);border-radius:100px;padding:5px 11px;font-weight:700}
+.act .go{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line-2);display:grid;place-items:center;color:var(--ink);transition:.5s var(--ease);flex:0 0 auto}
+.act:hover .go{background:var(--clay);border-color:var(--clay);color:#fff;transform:rotate(-45deg)}
+@media(max-width:640px){.act{grid-template-columns:auto 1fr;gap:14px}.act .go{display:none}}
+
+/* ---- staff ---- */
+.staff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:820px){.staff-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.staff-grid{grid-template-columns:1fr}}
+.coach{border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;background:var(--bg);transition:transform .5s var(--ease),box-shadow .5s}
+.coach:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.coach .ini{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--clay),var(--gold));display:grid;place-items:center;font-family:"Bricolage Grotesque";font-weight:800;color:#fff;font-size:1.2rem;margin-bottom:16px}
+.coach b{font-size:16px;display:block}
+.coach .role{color:var(--clay);font-size:13px;font-weight:600;margin-top:2px}
+.coach .cred{color:var(--muted);font-size:13px;margin-top:10px;line-height:1.5}
+
+/* ---- summer camp ---- */
+.camp{position:relative;color:#fff;overflow:hidden}
+.camp-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
+@media(max-width:860px){.camp-inner{grid-template-columns:1fr}}
+.camp-media{aspect-ratio:1/1}
+.camp-media .live{position:absolute;top:16px;left:16px;z-index:2;display:flex;align-items:center;gap:8px;background:oklch(0.20 0.03 260 / .7);backdrop-filter:blur(6px);border:1px solid oklch(1 0 0 / .2);padding:7px 13px;border-radius:100px;font-family:"JetBrains Mono";font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.camp-media .live .d{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:glow 1.8s infinite}
+.camp .kicker{color:var(--gold)}.camp .kicker::before{background:var(--gold)}
+.camp h2{font-size:clamp(2rem,5vw,3.4rem)}
+.camp p{color:oklch(0.9 0.01 250);margin-top:18px;max-width:48ch}
+.camp-facts{display:flex;gap:28px;margin-top:28px;flex-wrap:wrap}
+.camp-facts .f b{font-family:"Bricolage Grotesque";font-size:2rem;display:block;color:var(--gold)}
+.camp-facts .f span{font-size:13px;color:oklch(0.82 0.01 250)}
+
+/* ---- portal teaser ---- */
+.portal-teaser{background:radial-gradient(1200px 600px at 80% 0%,oklch(0.56 0.17 40 / .12),transparent 60%),var(--bg)}
+.pt-top{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;margin-bottom:44px}
+@media(max-width:760px){.pt-top{grid-template-columns:1fr}}
+.pt-cards{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.pcard{border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;background:var(--bg);transition:transform .6s var(--ease),box-shadow .6s,border-color .4s;position:relative;overflow:hidden}
+.pcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+.pcard .pic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;margin-bottom:18px}
+.pcard h4{font-family:"Bricolage Grotesque";font-weight:700;font-size:1.25rem;letter-spacing:-.01em}
+.pcard p{color:var(--muted);font-size:14.5px;margin-top:8px}
+.pcard.c-a{grid-column:span 7}.pcard.c-b{grid-column:span 5}
+.pcard.c-c{grid-column:span 4}.pcard.c-d{grid-column:span 4}.pcard.c-e{grid-column:span 4}
+@media(max-width:860px){.pcard.c-a,.pcard.c-b{grid-column:span 12}.pcard.c-c,.pcard.c-d,.pcard.c-e{grid-column:span 12}}
+.pcard.feature{background:var(--ink);color:#fff;border-color:transparent}
+.pcard.feature p{color:oklch(0.82 0.01 250)}
+.pcard.feature .pic{background:oklch(1 0 0 / .1);color:var(--gold)}
+.ladder{margin-top:22px;display:flex;flex-direction:column;gap:9px}
+.lrow{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;font-size:13.5px}
+.lrow .rk{font-family:"JetBrains Mono";font-weight:700;color:var(--gold);width:26px}
+.lrow .who{display:flex;align-items:center;gap:9px;color:#fff}
+.lrow .av{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--clay),var(--gold));display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff}
+.lrow .el{font-family:"JetBrains Mono";font-weight:700;color:oklch(0.86 0.01 250)}
+.lrow .bar{grid-column:1/-1;height:4px;border-radius:4px;background:oklch(1 0 0 / .1);overflow:hidden}
+.lrow .bar i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--clay),var(--gold));width:0;transition:width 1.4s var(--ease)}
+
+/* ---- pricing ---- */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:820px){.price-grid{grid-template-columns:1fr}}
+.plan{border:1px solid var(--line);border-radius:var(--r-lg);padding:32px;display:flex;flex-direction:column;background:var(--bg);transition:transform .5s var(--ease),box-shadow .5s}
+.plan:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.plan.hot{border-color:var(--clay);box-shadow:0 20px 50px -24px oklch(0.56 0.17 40 / .5);position:relative}
+.plan.hot .tag{position:absolute;top:-13px;left:32px;background:var(--clay);color:#fff;font-family:"JetBrains Mono";font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:100px;font-weight:700}
+.plan h3{font-size:1.35rem}
+.plan .amt{font-family:"Bricolage Grotesque";font-weight:800;font-size:2.7rem;letter-spacing:-.03em;margin:14px 0 2px;line-height:1}
+.plan .amt small{font-family:"Hanken Grotesk";font-size:.95rem;font-weight:500;color:var(--muted);letter-spacing:0}
+.plan .note{font-size:13px;color:var(--faint);margin-top:6px}
+.plan ul{list-style:none;padding:0;margin:22px 0 26px;display:flex;flex-direction:column;gap:12px}
+.plan li{display:flex;gap:11px;font-size:14.5px;color:var(--muted)}
+.plan li svg{flex:0 0 auto;color:var(--court);margin-top:3px}
+.plan .btn{margin-top:auto;justify-content:center}
+
+/* ---- gallery ---- */
+.gal{background:var(--surface)}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px}
+.gal-grid a{border-radius:var(--r);overflow:hidden;position:relative;display:block}
+.gal-grid img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.gal-grid a:hover img{transform:scale(1.08)}
+.gal-grid .g1{grid-column:span 2;grid-row:span 2}
+.gal-grid .g4{grid-column:span 2}
+@media(max-width:760px){.gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}.gal-grid .g1{grid-column:span 2;grid-row:span 1}.gal-grid .g4{grid-column:span 2}}
+
+/* ---- sponsors ---- */
+.spon{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.spon-in{display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;padding-block:34px}
+.spon .lab{font-family:"JetBrains Mono";font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.spon .logos{display:flex;gap:clamp(24px,5vw,56px);align-items:center;flex-wrap:wrap}
+.spon .logos b{font-family:"Bricolage Grotesque";font-weight:800;font-size:1.5rem;color:var(--ink);letter-spacing:-.02em;opacity:.55;transition:opacity .3s}
+.spon .logos b:hover{opacity:1}
+.spon .logos b span{color:var(--clay)}
+
+/* ---- cta band ---- */
+.ctaband{background:var(--clay);color:#fff;text-align:center}
+.ctaband .in{padding-block:clamp(60px,9vw,110px)}
+.ctaband h2{font-size:clamp(2rem,6vw,4rem);color:#fff}
+.ctaband p{color:oklch(0.96 0.03 45);margin:18px auto 0;max-width:46ch}
+.ctaband .btn-dark{background:#fff;color:var(--clay-deep)}
+.ctaband .btn-dark:hover{background:var(--ink);color:#fff}
+.ctaband .hero-cta{justify-content:center}
+
+/* ---- footer ---- */
+footer{background:var(--ink);color:oklch(0.82 0.01 250);padding-block:64px 34px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px}
+@media(max-width:820px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.foot-grid{grid-template-columns:1fr}}
+footer .brand .name b{color:#fff}footer .brand .name span{color:var(--gold)}
+footer h5{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:0 0 16px}
+footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+footer a,footer li{font-size:14.5px;color:oklch(0.82 0.01 250);transition:color .3s}
+footer a:hover{color:#fff}
+footer .about{max-width:34ch;font-size:14.5px;margin:18px 0 0}
+.foot-bot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:24px;border-top:1px solid oklch(1 0 0 / .1);font-size:13px;color:var(--faint)}
+
+/* ---- reveal motion ---- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv-d1{transition-delay:.09s}.rv-d2{transition-delay:.18s}.rv-d3{transition-delay:.27s}.rv-d4{transition-delay:.36s}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .hero-bg img{transform:none!important}
+  .reveal-img img{transform:none}.reveal-img::after{display:none}
+  .scrollcue .line,.hero .eyebrow .dot,.camp-media .live .d{animation:none}
+  .btn,.court-card img,.gal-grid img{transition:none}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Sporting Faloppio home">
+      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <circle cx="24" cy="24" r="23" fill="oklch(0.56 0.17 40)"/>
+        <ellipse cx="24" cy="20" rx="10" ry="12" fill="none" stroke="#fff" stroke-width="2.4"/>
+        <path d="M24 32 V44" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M16.5 13 L31.5 27 M31.5 13 L16.5 27 M24 9.5 V30.5 M14.5 20 H33.5" stroke="oklch(0.96 0.03 45)" stroke-width="1.1" opacity=".8"/>
+        <circle cx="35" cy="13" r="4.4" fill="oklch(0.80 0.14 88)" stroke="var(--ink)" stroke-width="1"/>
+      </svg>
+      <span class="name"><b>Sporting Faloppio</b><span>100% Tennis &amp; Sport</span></span>
+    </a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#campi" data-i18n="nav_courts">Campi</a>
+      <a href="#attivita" data-i18n="nav_activities">Attività</a>
+      <a href="#camp" data-i18n="nav_camp">Summer Camp</a>
+      <a href="#area" data-i18n="nav_portal">Area Soci</a>
+      <a href="#tariffe" data-i18n="nav_pricing">Tariffe</a>
+      <a href="#contatti" data-i18n="nav_contact">Contatti</a>
+      <a class="btn btn-primary cta-mobile" href="portal.html" data-i18n="nav_login">Area Riservata</a>
+      <div class="lang lang-mobile" role="group" aria-label="Lingua"><button data-lang="it" class="on">IT</button><button data-lang="en">EN</button></div>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang" role="group" aria-label="Lingua">
+        <button data-lang="it" class="on">IT</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <a class="btn btn-primary cta-desktop" href="portal.html">
+        <span data-i18n="nav_login">Area Riservata</span>
+        <svg class="arw" width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg">
+    <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=2000&q=80" alt="Giocatore in battuta su un campo color terra rossa, vista dall'alto con lunghe ombre pomeridiane">
+  </div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow"><span class="dot"></span><span data-i18n="hero_eyebrow">Faloppio · Como · 5 km dal confine svizzero</span></span>
+    <h1><span class="ln"><span data-i18n="hero_h1_a">Il tennis</span></span><span class="ln"><span><em data-i18n="hero_h1_b">è casa.</em></span></span><span class="ln"><span data-i18n="hero_h1_c">Tutto l'anno.</span></span></h1>
+    <p class="lede" data-i18n="hero_lede">Due campi indoor sotto il pallone e uno all'aperto, in resina color terra rossa. Scuola tennis FITP, tornei interni D-Match e un'area soci dove ogni partita conta.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary btn-lg" href="#tariffe"><span data-i18n="hero_cta1">Prenota un campo</span>
+        <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="btn btn-ghost btn-lg" href="portal.html" data-i18n="hero_cta2">Entra nell'area soci</a>
+    </div>
+  </div>
+  <div class="scrollcue" aria-hidden="true"><span>scroll</span><span class="line"></span></div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat"><div class="num" data-count="3">0</div><div class="lbl" data-i18n="stat_courts">Campi da gioco</div></div>
+    <div class="stat"><div class="num" data-count="2">0</div><div class="lbl" data-i18n="stat_indoor">Indoor sotto il pallone</div></div>
+    <div class="stat"><div class="num" data-count="4">0</div><div class="lbl" data-i18n="stat_coaches">Maestri FITP</div></div>
+    <div class="stat"><div class="num" data-count="30"><span>0</span><span class="u">+</span></div><div class="lbl" data-i18n="stat_years">Anni di esperienza</div></div>
+  </div>
+</section>
+
+<!-- INTRO / LOCATION -->
+<section class="sec intro" id="chi">
+  <div class="wrap intro-grid">
+    <div class="rv">
+      <div class="kicker" data-i18n="k_club">Il circolo</div>
+      <h2 class="big" data-i18n="intro_h">Un circolo di tennis vero, a due passi da Como.</h2>
+      <p style="color:var(--muted);margin-top:18px;font-size:18px" data-i18n="intro_p">Allo Sporting Faloppio si gioca tutto l'anno: due campi indoor sotto il pallone pressostatico e uno all'aperto, in resina color terra rossa. Un posto dove i bambini imparano a servire, gli agonisti si sfidano nel circuito interno e chi ha smesso di correre trova comunque un campo, un avversario e un caffè dopo la partita.</p>
+      <div class="feat-list">
+        <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg></div>
+          <div><h4 data-i18n="f1_h">Superficie color terra</h4><p data-i18n="f1_p">Resina indoor e outdoor color terra rossa: manto uniforme, gioco morbido, nessun fango dopo la pioggia.</p></div></div>
+        <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 20V9l9-6 9 6v11" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3 14h18" stroke="currentColor" stroke-width="2"/></svg></div>
+          <div><h4 data-i18n="f2_h">Pallone riscaldato</h4><p data-i18n="f2_p">D'inverno i due campi coperti restano al caldo. Gioca a gennaio come a luglio, con qualsiasi meteo.</p></div></div>
+        <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="11" r="2.4" stroke="currentColor" stroke-width="2"/></svg></div>
+          <div><h4 data-i18n="f3_h">Via Giovanni Falcone, 2</h4><p data-i18n="f3_p">Faloppio (CO). 13 km da Como, 14 da Varese, 42 da Milano, 5 km dal valico di frontiera.</p></div></div>
+      </div>
+    </div>
+    <div class="reveal-img intro-media rv rv-d2">
+      <img src="https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=1100&q=80" alt="Giocatore esegue un diritto in campo all'aperto circondato da alberi">
+      <div class="tag"><div class="pin"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="11" r="2.2" stroke="currentColor" stroke-width="2"/></svg></div>
+        <div><b>Faloppio (CO)</b><small data-i18n="map_sub">Prenotazioni allo 031 986655</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COURTS -->
+<section class="sec" id="campi">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker" data-i18n="k_courts">I campi</div>
+      <h2 class="big" data-i18n="courts_h">Tre campi. Nessuna scusa per non giocare.</h2>
+      <p data-i18n="courts_p">Due indoor riscaldati sotto il pallone, uno all'aperto per le belle giornate. Tutti in resina color terra rossa. Prenoti dall'app, apri il campo con il tuo profilo.</p>
+    </div>
+    <div class="courts-grid">
+      <div class="court-card rv"><img src="https://images.unsplash.com/photo-1542144582-1ba00456b5e3?auto=format&fit=crop&w=1100&q=80" alt="Racchetta e pallina appoggiate su un campo color terra visto dall'alto">
+        <div class="cc-body"><span class="badge" data-i18n="cc1_b">2 indoor</span><h3 data-i18n="cc1_h">Sotto il pallone</h3><p data-i18n="cc1_p">Due campi coperti dal pallone pressostatico riscaldato. Aperti tutto l'anno, con qualsiasi tempo.</p></div></div>
+      <div class="court-card rv rv-d1"><img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1100&q=80" alt="Campo color terra rossa illuminato dal sole con lunghe ombre">
+        <div class="cc-body"><span class="badge" data-i18n="cc2_b">1 outdoor</span><h3 data-i18n="cc2_h">All'aperto</h3><p data-i18n="cc2_p">Il campo scoperto per la bella stagione, con illuminazione serale. Da aprile a ottobre.</p></div></div>
+      <div class="court-card wide rv"><img src="https://images.unsplash.com/photo-1560012057-4372e14c5085?auto=format&fit=crop&w=1600&q=80" alt="Racchetta e pallina da tennis su fondo blu">
+        <div class="cc-body"><span class="badge" data-i18n="cc3_b">Servizi</span><h3 data-i18n="cc3_h">Incordatura, pro shop Dunlop, lezioni private</h3><p data-i18n="cc3_p">Racchette in prova, incordatura e lezioni individuali con i maestri del circolo. Spogliatoi e club house sul posto.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section class="sec acts" id="attivita">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker" data-i18n="k_act">Attività</div>
+      <h2 class="big" data-i18n="act_h">Dai primi rimbalzi all'agonismo.</h2>
+      <p data-i18n="act_p">Programmi per ogni età e livello, tutto l'anno. Scegli il tuo e iscriviti dall'area soci.</p>
+    </div>
+    <div class="acts-list">
+      <div class="act rv"><span class="idx">01</span><div class="main"><h3 data-i18n="a1_h">Scuola Tennis bambini &amp; ragazzi</h3><p class="desc" data-i18n="a1_d">Dai 4 anni. Gioco-tennis, mini-tennis e avviamento con i maestri FITP, da ottobre a giugno.</p><div class="meta"><span class="chip" data-i18n="a1_c1">Da 4 anni</span><span class="chip" data-i18n="a1_c2">Ott – Giu</span></div></div><div class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+      <div class="act rv"><span class="idx">02</span><div class="main"><h3 data-i18n="a2_h">Corso Adulti serale</h3><p class="desc" data-i18n="a2_d">Principianti o di ritorno al campo: cicli di 10 lezioni serali a piccoli gruppi. C'è anche il corso gratuito di settembre.</p><div class="meta"><span class="chip" data-i18n="a2_c1">Tutti i livelli</span><span class="chip" data-i18n="a2_c2">10 lezioni</span></div></div><div class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+      <div class="act rv"><span class="idx">03</span><div class="main"><h3 data-i18n="a3_h">Agonistica &amp; Pre-agonistica</h3><p class="desc" data-i18n="a3_d">Preparazione tecnica, tattica e atletica per chi gioca i tornei FITP e il campionato interno D-Match.</p><div class="meta"><span class="chip" data-i18n="a3_c1">Selezione</span><span class="chip" data-i18n="a3_c2">Sparring + atletica</span></div></div><div class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+      <div class="act rv"><span class="idx">04</span><div class="main"><h3 data-i18n="a4_h">CrossTraining</h3><p class="desc" data-i18n="a4_d">Forza, mobilità e prevenzione infortuni con il preparatore atletico. Il lavoro fuori dal campo che si vede dentro al campo.</p><div class="meta"><span class="chip" data-i18n="a4_c1">Piccoli gruppi</span><span class="chip" data-i18n="a4_c2">Tutto l'anno</span></div></div><div class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+      <div class="act rv"><span class="idx">05</span><div class="main"><h3 data-i18n="a5_h">Attività motoria per la terza età</h3><p class="desc" data-i18n="a5_d">Movimento dolce e tennis leggero, pensati per restare attivi con gusto. Il campo non ha età.</p><div class="meta"><span class="chip" data-i18n="a5_c1">Senior</span><span class="chip" data-i18n="a5_c2">Mattina</span></div></div><div class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STAFF -->
+<section class="sec" id="staff">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker" data-i18n="k_staff">Lo staff tecnico</div>
+      <h2 class="big" data-i18n="staff_h">Maestri che sono qui dal 1994.</h2>
+      <p data-i18n="staff_p">Un gruppo stabile di tecnici certificati FITP. Continuità vera: gli stessi maestri seguono i ragazzi dall'avviamento all'agonismo.</p>
+    </div>
+    <div class="staff-grid">
+      <div class="coach rv"><div class="ini">AC</div><b>Antonio Chiriatti</b><div class="role" data-i18n="st1_r">Direttore Tecnico</div><p class="cred" data-i18n="st1_c">Maestro Nazionale FIT dal 1999, Istruttore USPTR Professional, Monitor G+S Swiss Tennis, CardioTennis &amp; Padel Instructor.</p></div>
+      <div class="coach rv rv-d1"><div class="ini">LC</div><b>Luca Cussigh</b><div class="role" data-i18n="st2_r">Direttore di Centro · Prep. Atletico</div><p class="cred" data-i18n="st2_c">Diplomato I.S.E.F. dal 1991, Preparatore Fisico F.I.T. dal 1997. Cura il CrossTraining e l'atletica.</p></div>
+      <div class="coach rv rv-d2"><div class="ini">PL</div><b>Patricio Laspina</b><div class="role" data-i18n="st3_r">Maestro</div><p class="cred" data-i18n="st3_c">Scuola tennis e corsi, dall'avviamento dei più piccoli al perfezionamento degli adulti.</p></div>
+      <div class="coach rv rv-d3"><div class="ini">AV</div><b>Antonio Vigliotti</b><div class="role" data-i18n="st4_r">Maestro</div><p class="cred" data-i18n="st4_c">Scuola tennis e settore giovanile, con un occhio di riguardo per il pre-agonistico.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUMMER CAMP -->
+<section class="sec camp" id="camp" style="background:var(--night)">
+  <div class="wrap camp-inner">
+    <div class="reveal-img camp-media rv">
+      <img src="https://sporting.co.it/wp-content/uploads/2026/06/ChatGPT-Image-25-giu-2026-15_57_15-600x600.png" alt="Campo coperto dello Sporting Faloppio illuminato di notte durante la Summer Camp Night">
+      <div class="live"><span class="d"></span><span data-i18n="camp_live">Iscrizioni aperte</span></div>
+    </div>
+    <div class="rv rv-d1">
+      <div class="kicker" data-i18n="k_camp">Summer Camp 2026</div>
+      <h2 data-i18n="camp_h">L'estate al circolo. Tennis, amici, notti in campo.</h2>
+      <p data-i18n="camp_p">Da giugno a settembre: tennis la mattina, giochi il pomeriggio e le leggendarie Summer Camp Night con caccia alle lucciole e colazione all'alba. Per bambini e ragazzi. C'è anche lo stage intensivo su terra battuta.</p>
+      <div class="camp-facts">
+        <div class="f"><b class="mono" data-count="12">0</b><span data-i18n="camp_f1">settimane</span></div>
+        <div class="f"><b class="mono">6–14</b><span data-i18n="camp_f2">anni</span></div>
+        <div class="f"><b class="mono">Night</b><span data-i18n="camp_f3">edition inclusa</span></div>
+      </div>
+      <div class="hero-cta"><a class="btn btn-primary btn-lg" href="#contatti" data-i18n="camp_cta">Scopri il programma</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAL TEASER -->
+<section class="sec portal-teaser" id="area">
+  <div class="wrap">
+    <div class="pt-top">
+      <div class="rv">
+        <div class="kicker" data-i18n="k_portal">Area riservata soci</div>
+        <h2 class="big" data-i18n="pt_h">Ogni partita conta. Sali in classifica.</h2>
+        <p style="color:var(--muted);margin-top:16px;max-width:56ch;font-size:18px" data-i18n="pt_p">L'area soci trasforma il circolo in un gioco: iscriviti, ricevi il tuo livello, sfida chi ti sta sopra nel circuito D-Match, trova avversari del tuo livello nel giorno che vuoi e vinci premi a fine stagione.</p>
+      </div>
+      <a class="btn btn-dark btn-lg rv rv-d1" href="portal.html"><span data-i18n="pt_cta">Prova la demo</span>
+        <svg class="arw" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="pt-cards">
+      <div class="pcard feature c-a rv">
+        <div class="pic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 21h8M12 17v4M6 4h12v5a6 6 0 01-12 0V4zM6 6H3v2a3 3 0 003 3M18 6h3v2a3 3 0 01-3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h4 data-i18n="pc1_h">Challenge &amp; Ranking</h4>
+        <p data-i18n="pc1_p">Il circuito D-Match con rating ELO, ladder di stagione e premi finali. Sfida chi ti sta appena sopra e rubagli il posto.</p>
+        <div class="ladder" id="ladderPrev">
+          <div class="lrow"><span class="rk">01</span><span class="who"><span class="av">MB</span>Matteo B.</span><span class="el">1584</span><span class="bar"><i data-w="100"></i></span></div>
+          <div class="lrow"><span class="rk">02</span><span class="who"><span class="av">LF</span>Luca F.</span><span class="el">1542</span><span class="bar"><i data-w="88"></i></span></div>
+          <div class="lrow"><span class="rk">03</span><span class="who"><span class="av">SG</span>Sara G.</span><span class="el">1519</span><span class="bar"><i data-w="80"></i></span></div>
+        </div>
+      </div>
+      <div class="pcard c-b rv rv-d1">
+        <div class="pic" style="background:var(--clay-wash);color:var(--clay-deep)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="10" r="2.6" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5M14.5 19c0-2.2 1.4-4 3.5-4s3.5 1.4 3.5 3.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h4 data-i18n="pc2_h">Trova partita per livello</h4>
+        <p data-i18n="pc2_p">Ti metti in lista per lunedì sera: il sistema ti accoppia con chi ha il tuo stesso livello e la stessa disponibilità. Niente più chat infinite per organizzare.</p>
+      </div>
+      <div class="pcard c-c rv">
+        <div class="pic" style="background:oklch(0.95 0.03 155);color:var(--court-deep)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 9h18M8 2v4M16 2v4M12 12v6M9 15h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h4 data-i18n="pc3_h">Prenota il campo</h4>
+        <p data-i18n="pc3_p">Griglia oraria live dei tre campi. Prenoti, inviti l'avversario, apri il campo.</p>
+      </div>
+      <div class="pcard c-d rv rv-d1">
+        <div class="pic" style="background:var(--clay-wash);color:var(--clay-deep)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 20V9M10 20V4M16 20v-7M22 20H2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h4 data-i18n="pc4_h">Statistiche &amp; premi</h4>
+        <p data-i18n="pc4_p">Ore giocate, win-rate, striscia vincente, rivalità. Chi gioca di più vince i premi Dunlop.</p>
+      </div>
+      <div class="pcard c-e rv rv-d2">
+        <div class="pic" style="background:oklch(0.97 0.05 88);color:var(--gold-ink)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 15a5 5 0 005-5V3H7v7a5 5 0 005 5zM12 15v4M8 22h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h4 data-i18n="pc5_h">Badge &amp; obiettivi</h4>
+        <p data-i18n="pc5_p">Sblocca traguardi, sali di livello e colleziona i badge di stagione. Il tennis, ma con l'XP.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec" id="tariffe">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker" data-i18n="k_price">Tariffe &amp; prenotazione</div>
+      <h2 class="big" data-i18n="price_h">Prezzi chiari. Prenotazione in 30 secondi.</h2>
+      <p data-i18n="price_p">Tariffe reali del circolo. Prenoti dall'area soci o allo 031 986655. La quota socio è richiesta per i corsi.</p>
+    </div>
+    <div class="price-grid">
+      <div class="plan rv">
+        <h3 data-i18n="pl1_h">Ora di campo</h3>
+        <div class="amt">18€ <small data-i18n="pl1_u">/ ora · mag–set</small></div>
+        <div class="note" data-i18n="pl1_note">22€ nel periodo ott–apr</div>
+        <ul>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pl1_1">Residenti Faloppio 15€ / 19€</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pl1_2">Under 16: 6€ / ora</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pl1_3">Illuminazione +3€ / ora</span></li>
+        </ul>
+        <a class="btn btn-ghost" href="portal.html" data-i18n="pl1_cta">Prenota ora</a>
+      </div>
+      <div class="plan hot rv rv-d1">
+        <span class="tag" data-i18n="pl2_tag">Per giocare sempre</span>
+        <h3 data-i18n="pl2_h">Socio + tessera</h3>
+        <div class="amt">35€ <small data-i18n="pl2_u">/ anno quota</small></div>
+        <div class="note" data-i18n="pl2_note">+ tessera FITP da 35€ (50€ agonisti)</div>
+        <ul>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pl2_1">Accesso al circuito D-Match</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pl2_2">Matchmaking &amp; classifiche</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pl2_3">Prenotazione online dei campi</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pl2_4">Premi di stagione Dunlop</span></li>
+        </ul>
+        <a class="btn btn-primary" href="portal.html" data-i18n="pl2_cta">Diventa socio</a>
+      </div>
+      <div class="plan rv rv-d2">
+        <h3 data-i18n="pl3_h">Corsi &amp; lezioni</h3>
+        <div class="amt">da 240€ <small data-i18n="pl3_u">/ ciclo</small></div>
+        <div class="note" data-i18n="pl3_note">Scuola bimbi 570€ (ott–giu)</div>
+        <ul>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pl3_1">Corso adulti: 10 lezioni serali 240€</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pl3_2">Lezione privata 60′: 45€</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="pl3_3">Maestri FITP certificati</span></li>
+        </ul>
+        <a class="btn btn-ghost" href="#contatti" data-i18n="pl3_cta">Richiedi info</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec gal">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker" data-i18n="k_gal">Galleria</div>
+      <h2 class="big" data-i18n="gal_h">Il circolo, da vicino.</h2>
+    </div>
+    <div class="gal-grid">
+      <a class="g1 rv"><img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1100&q=80" alt="Battuta su campo color terra vista dall'alto"></a>
+      <a class="rv rv-d1"><img src="https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=700&q=80" alt="Diritto in campo all'aperto"></a>
+      <a class="rv rv-d2"><img src="https://images.unsplash.com/photo-1542144582-1ba00456b5e3?auto=format&fit=crop&w=700&q=80" alt="Racchetta e pallina su campo color terra"></a>
+      <a class="g4 rv rv-d1"><img src="https://images.unsplash.com/photo-1607962837359-5e7e89f86776?auto=format&fit=crop&w=1100&q=80" alt="Sessione di crosstraining all'aperto in gruppo"></a>
+      <a class="rv rv-d2"><img src="https://sporting.co.it/wp-content/uploads/2026/06/ChatGPT-Image-25-giu-2026-15_57_15-600x600.png" alt="Pallone del circolo illuminato di notte"></a>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSORS -->
+<section class="spon">
+  <div class="wrap spon-in">
+    <span class="lab rv" data-i18n="spon_lab">Partner del circolo</span>
+    <div class="logos rv rv-d1">
+      <b>DUNLOP</b>
+      <b>Break<span>Point</span></b>
+      <b>Collagen<span>+</span></b>
+      <b>FITP</b>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="ctaband">
+  <div class="wrap in">
+    <h2 class="rv" data-i18n="cta_h">Pronto a scendere in campo?</h2>
+    <p class="rv rv-d1" data-i18n="cta_p">Prenota un campo, prova una lezione o entra nell'area soci e inizia a scalare la classifica.</p>
+    <div class="hero-cta rv rv-d2">
+      <a class="btn btn-dark btn-lg" href="portal.html" data-i18n="cta_b1">Entra nell'area soci</a>
+      <a class="btn btn-ghost btn-lg" href="#contatti" style="color:#fff;border-color:oklch(1 0 0 / .5)" data-i18n="cta_b2">Contattaci</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer id="contatti">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top">
+          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="oklch(0.56 0.17 40)"/><ellipse cx="24" cy="20" rx="10" ry="12" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M24 32 V44" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="35" cy="13" r="4.4" fill="oklch(0.80 0.14 88)"/></svg>
+          <span class="name"><b>Sporting Faloppio</b><span>100% Tennis &amp; Sport</span></span>
+        </a>
+        <p class="about" data-i18n="foot_about">Circolo di tennis a Faloppio (CO): due campi indoor sotto il pallone e uno all'aperto in resina color terra. Scuola tennis, D-Match, summer camp e area soci.</p>
+      </div>
+      <div>
+        <h5 data-i18n="foot_visit">Vieni a trovarci</h5>
+        <ul>
+          <li><a href="https://maps.google.com/?q=Via+Giovanni+Falcone+2+Faloppio" target="_blank" rel="noopener">Via Giovanni Falcone, 2<br>22020 Faloppio (CO)</a></li>
+          <li data-i18n="foot_dist">13 km da Como · 5 km dal confine</li>
+        </ul>
+      </div>
+      <div>
+        <h5 data-i18n="foot_contact">Contatti</h5>
+        <ul>
+          <li><a href="tel:+390319866550">+39 031 986655</a></li>
+          <li><a href="https://wa.me/393713190305" target="_blank" rel="noopener">WhatsApp 371 319 0305</a></li>
+          <li><a href="mailto:info@sporting.co.it">info@sporting.co.it</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 data-i18n="foot_links">Link</h5>
+        <ul>
+          <li><a href="portal.html" data-i18n="foot_l1">Area riservata</a></li>
+          <li><a href="#tariffe" data-i18n="foot_l2">Tariffe &amp; prenotazione</a></li>
+          <li><a href="#camp" data-i18n="foot_l3">Summer Camp 2026</a></li>
+          <li><a href="#attivita" data-i18n="foot_l4">Attività</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Sporting Faloppio — <span data-i18n="foot_demo">Demo redesign, non affiliato ufficialmente</span></span>
+      <span data-i18n="foot_made">100% Tennis &amp; Sport</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===== i18n ===== */
+const I18N={it:{},en:{
+  nav_courts:"Courts",nav_activities:"Programs",nav_camp:"Summer Camp",nav_portal:"Members",nav_pricing:"Pricing",nav_contact:"Contact",nav_login:"Members Area",
+  hero_eyebrow:"Faloppio · Como · 5 km from the Swiss border",
+  hero_h1_a:"Tennis",hero_h1_b:"is home.",hero_h1_c:"All year round.",
+  hero_lede:"Two indoor courts under the air-dome and one outdoor, in clay-coloured resin. FITP tennis school, internal D-Match tournaments, and a members' area where every match counts.",
+  hero_cta1:"Book a court",hero_cta2:"Enter the members' area",
+  stat_courts:"Playing courts",stat_indoor:"Indoor under the dome",stat_coaches:"FITP coaches",stat_years:"Years of experience",
+  k_club:"The club",intro_h:"A real tennis club, minutes from Como.",
+  intro_p:"At Sporting Faloppio you play all year: two indoor courts under the heated air-dome and one outdoor, in clay-coloured resin. A place where kids learn to serve, competitors battle in the internal circuit, and those who've stopped running still find a court, an opponent and a coffee after the match.",
+  f1_h:"Clay-coloured surface",f1_p:"Indoor and outdoor resin in clay red: an even surface, soft play, no mud after the rain.",
+  f2_h:"Heated air-dome",f2_p:"In winter the two covered courts stay warm. Play in January like in July, whatever the weather.",
+  f3_h:"Via Giovanni Falcone, 2",f3_p:"Faloppio (CO). 13 km from Como, 14 from Varese, 42 from Milan, 5 km from the border crossing.",
+  map_sub:"Bookings on 031 986655",
+  k_courts:"The courts",courts_h:"Three courts. No excuse not to play.",
+  courts_p:"Two heated indoor courts under the dome, one outdoor for sunny days. All in clay-coloured resin. Book from the app, open the court with your profile.",
+  cc1_b:"2 indoor",cc1_h:"Under the dome",cc1_p:"Two courts covered by the heated air-dome. Open all year, whatever the weather.",
+  cc2_b:"1 outdoor",cc2_h:"Open air",cc2_p:"The open court for the warm season, with evening floodlights. April to October.",
+  cc3_b:"Services",cc3_h:"Stringing, Dunlop pro shop, private lessons",cc3_p:"Demo rackets, stringing and private lessons with the club's coaches. Locker rooms and club house on site.",
+  k_act:"Programs",act_h:"From first bounces to competition.",act_p:"Programs for every age and level, all year round. Pick yours and sign up from the members' area.",
+  a1_h:"Junior Tennis School",a1_d:"From age 4. Play-tennis, mini-tennis and fundamentals with FITP coaches, October to June.",a1_c1:"From age 4",a1_c2:"Oct – Jun",
+  a2_h:"Adult evening course",a2_d:"Beginners or coming back to the court: cycles of 10 evening lessons in small groups. There's also the free September course.",a2_c1:"All levels",a2_c2:"10 lessons",
+  a3_h:"Competition & Pre-competition",a3_d:"Technical, tactical and athletic prep for FITP tournaments and the internal D-Match championship.",a3_c1:"By selection",a3_c2:"Sparring + fitness",
+  a4_h:"CrossTraining",a4_d:"Strength, mobility and injury prevention with the athletic trainer. The off-court work that shows on court.",a4_c1:"Small groups",a4_c2:"All year",
+  a5_h:"Fitness for seniors",a5_d:"Gentle movement and light tennis, made to stay active with pleasure. The court has no age.",a5_c1:"Senior",a5_c2:"Mornings",
+  k_staff:"The coaching staff",staff_h:"Coaches who've been here since 1994.",staff_p:"A stable team of FITP-certified coaches. Real continuity: the same coaches follow players from first steps to competition.",
+  st1_r:"Technical Director",st1_c:"FIT National Coach since 1999, USPTR Professional Instructor, G+S Swiss Tennis Monitor, CardioTennis & Padel Instructor.",
+  st2_r:"Centre Director · Athletic Trainer",st2_c:"I.S.E.F. graduate since 1991, F.I.T. Physical Trainer since 1997. Runs CrossTraining and fitness.",
+  st3_r:"Coach",st3_c:"Tennis school and courses, from the youngest beginners to adult refinement.",
+  st4_r:"Coach",st4_c:"Tennis school and youth sector, with a focus on pre-competition.",
+  k_camp:"Summer Camp 2026",camp_h:"Summer at the club. Tennis, friends, nights on court.",
+  camp_p:"June to September: tennis in the morning, games in the afternoon, and the legendary Summer Camp Nights with firefly hunts and sunrise breakfast. For kids and teens. There's also the intensive clay stage.",
+  camp_live:"Registration open",camp_f1:"weeks",camp_f2:"years",camp_f3:"edition included",camp_cta:"See the programme",
+  k_portal:"Members' reserved area",pt_h:"Every match counts. Climb the ranking.",
+  pt_p:"The members' area turns the club into a game: sign up, get your level, challenge whoever's above you in the D-Match circuit, find opponents at your level on the day you want, and win prizes at season's end.",
+  pt_cta:"Try the demo",
+  pc1_h:"Challenge & Ranking",pc1_p:"The D-Match circuit with ELO rating, season ladder and end-of-season prizes. Challenge whoever's just above you and take their spot.",
+  pc2_h:"Level-matched play",pc2_p:"You list yourself for Monday evening: the system pairs you with someone at your level and the same availability. No more endless chats to arrange a match.",
+  pc3_h:"Book the court",pc3_p:"Live hourly grid for all three courts. Book, invite your opponent, open the court.",
+  pc4_h:"Stats & prizes",pc4_p:"Hours played, win-rate, win streak, rivalries. Whoever plays most wins the Dunlop prizes.",
+  pc5_h:"Badges & goals",pc5_p:"Unlock milestones, level up and collect season badges. Tennis, but with XP.",
+  k_price:"Pricing & booking",price_h:"Clear prices. Book in 30 seconds.",price_p:"The club's real rates. Book from the members' area or on 031 986655. Membership is required for courses.",
+  pl1_h:"Court hour",pl1_u:"/ hour · May–Sep",pl1_note:"€22 in the Oct–Apr period",pl1_1:"Faloppio residents €15 / €19",pl1_2:"Under 16: €6 / hour",pl1_3:"Floodlights +€3 / hour",pl1_cta:"Book now",
+  pl2_tag:"To play all the time",pl2_h:"Member + card",pl2_u:"/ year membership",pl2_note:"+ FITP card from €35 (€50 competitors)",pl2_1:"Access to the D-Match circuit",pl2_2:"Matchmaking & rankings",pl2_3:"Online court booking",pl2_4:"Dunlop season prizes",pl2_cta:"Become a member",
+  pl3_h:"Courses & lessons",pl3_u:"/ cycle",pl3_note:"Junior school €570 (Oct–Jun)",pl3_1:"Adult course: 10 evening lessons €240",pl3_2:"Private lesson 60′: €45",pl3_3:"Certified FITP coaches",pl3_cta:"Request info",
+  k_gal:"Gallery",gal_h:"The club, up close.",
+  spon_lab:"Club partners",
+  cta_h:"Ready to step on court?",cta_p:"Book a court, try a lesson or enter the members' area and start climbing the ranking.",
+  cta_b1:"Enter the members' area",cta_b2:"Contact us",
+  foot_about:"Tennis club in Faloppio (CO): two indoor courts under the dome and one outdoor in clay-coloured resin. Tennis school, D-Match, summer camp and members' area.",
+  foot_visit:"Come visit",foot_dist:"13 km from Como · 5 km from the border",foot_contact:"Contact",foot_links:"Links",
+  foot_l1:"Members area",foot_l2:"Pricing & booking",foot_l3:"Summer Camp 2026",foot_l4:"Programs",
+  foot_demo:"Redesign demo, not officially affiliated",foot_made:"100% Tennis & Sport"
+}};
+(function(){document.querySelectorAll('[data-i18n]').forEach(el=>{I18N.it[el.dataset.i18n]=el.innerHTML});})();
+function setLang(l){
+  document.documentElement.lang=l;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const t=I18N[l][el.dataset.i18n];if(t!=null)el.innerHTML=t;});
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
+  try{localStorage.setItem('sf_lang',l)}catch(e){}
+}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+try{const s=localStorage.getItem('sf_lang');if(s&&s!=='it')setLang(s);}catch(e){}
+
+/* ===== hero entrance (enhances a visible default) ===== */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const hero=document.querySelector('.hero');if(!hero)return;
+  hero.classList.add('prep');                 // set pre-frame (no transition)
+  requestAnimationFrame(()=>requestAnimationFrame(()=>hero.classList.add('play')));
+})();
+
+/* ===== header + progress ===== */
+const hdr=document.getElementById('hdr'),prog=document.getElementById('progress');
+function onScroll(){
+  const y=window.scrollY;hdr.classList.toggle('scrolled',y>24);
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.width=(h>0?(y/h*100):0)+'%';
+}
+onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+/* ===== mobile menu ===== */
+const burger=document.getElementById('burger'),navlinks=document.getElementById('navlinks');
+burger.addEventListener('click',()=>{const o=navlinks.classList.toggle('open');burger.setAttribute('aria-expanded',o);});
+navlinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navlinks.classList.remove('open');burger.setAttribute('aria-expanded',false);}));
+
+/* ===== reduced motion ===== */
+const RM=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ===== reveal + image reveal ===== */
+const revs=document.querySelectorAll('.rv,.reveal-img');
+if(RM){revs.forEach(r=>r.classList.add('in'));document.querySelectorAll('.lrow .bar i').forEach(i=>i.style.width=i.dataset.w+'%');}
+else{
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+  revs.forEach(r=>io.observe(r));
+  const lp=document.getElementById('ladderPrev');
+  if(lp){const io2=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.bar i').forEach(i=>i.style.width=i.dataset.w+'%');io2.unobserve(e.target);}});},{threshold:.3});io2.observe(lp);}
+}
+
+/* ===== count-up ===== */
+if(RM){document.querySelectorAll('[data-count]').forEach(el=>{const u=el.querySelector('.u');el.textContent=el.dataset.count;if(u)el.appendChild(u);});}
+else{
+  const cio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){const el=e.target;const target=+el.dataset.count;
+    const unit=el.querySelector('.u');const unitHTML=unit?unit.outerHTML:'';const dur=1500,t0=performance.now();
+    function step(t){const p=Math.min((t-t0)/dur,1),k=1-Math.pow(1-p,3);el.innerHTML=Math.round(target*k)+unitHTML;if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);cio.unobserve(el);}});},{threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+}
+
+/* ===== hero parallax ===== */
+if(!RM){
+  const bg=document.getElementById('heroBg');let ticking=false;
+  window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{
+    const y=window.scrollY;if(y<window.innerHeight){bg.style.transform='translateY('+(y*0.3)+'px)';}
+    ticking=false;});ticking=true;}},{passive:true});
+}
+</script>
+</body>
+</html>
