@@ -311,10 +311,15 @@ h2.big{font-size:clamp(2.1rem,5.2vw,3.6rem)}
 .marquee .track{display:flex;align-items:center;width:max-content;animation:mq 34s linear infinite}
 .marquee:hover .track{animation-play-state:paused}
 .mq-item{display:inline-flex;align-items:center;gap:.5em;padding:26px clamp(22px,4vw,48px);white-space:nowrap;
-  font-family:"Bricolage Grotesque";font-weight:800;letter-spacing:-.01em;text-transform:uppercase;font-size:clamp(1.3rem,3.2vw,2.1rem)}
+  font-family:"Bricolage Grotesque";font-weight:800;letter-spacing:-.01em;text-transform:uppercase;font-size:clamp(1.3rem,3.2vw,2.1rem);
+  text-decoration:none;transition:color .3s var(--ease)}
 .mq-item.spon{color:var(--ink)}
-.mq-item.term{color:var(--faint);font-weight:700}
-.mq-item .dot{width:9px;height:9px;border-radius:50%;background:var(--clay);flex:0 0 auto}
+.mq-item.spon:hover{color:var(--clay)}
+.mq-item.term{color:var(--clay)}
+.mq-item.term:hover{color:var(--clay-deep)}
+.mq-item .dot{width:9px;height:9px;border-radius:50%;background:var(--clay);flex:0 0 auto;transition:transform .3s var(--ease)}
+.mq-item:hover .dot{transform:scale(1.5)}
+.marquee a.mq-item:focus-visible{outline:2px solid var(--clay);outline-offset:-6px;border-radius:8px}
 @keyframes mq{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.marquee .track{animation:none}}
 
@@ -794,11 +799,18 @@ else{
   const lp=document.getElementById('ladderPrev');
   if(lp){const io2=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.bar i').forEach(i=>i.style.width=i.dataset.w+'%');io2.unobserve(e.target);}});},{threshold:.3});io2.observe(lp);}
 }
-/* marquee: sponsors + terms, duplicated for a seamless loop */
+/* marquee: clickable sponsors + club links, duplicated for a seamless loop */
 (function(){const t=document.getElementById('mqTrack');if(!t)return;
-  const items=[['Dunlop','spon'],['Terra Rossa','term'],['Break Point','spon'],['Summer Camp','term'],
-    ['Collagen+','spon'],['D-Match','term'],['FITP','spon'],['Sotto il Pallone','term']];
-  const seq=items.map(([tx,cl])=>'<span class="mq-item '+cl+'"><span class="dot"></span>'+tx+'</span>').join('');
+  // [label, class, href, external]
+  const items=[
+    ['Dunlop','spon','https://www.dunlopsports.com/',1],
+    ['Summer Camp','term','#camp',0],
+    ['Break Point','spon','https://www.breakpointsport.it/',1],
+    ['D-Match','term','#area',0],
+    ['Collagen+','spon','https://www.google.com/search?q=Collagen+Plus+Sport',1],
+    ['FITP','spon','https://www.fitp.it/',1]
+  ];
+  const seq=items.map(([tx,cl,href,ext])=>'<a class="mq-item '+cl+'" href="'+href+'"'+(ext?' target="_blank" rel="noopener"':'')+'><span class="dot"></span>'+tx+'</a>').join('');
   t.innerHTML=seq+seq;})();
 
 
