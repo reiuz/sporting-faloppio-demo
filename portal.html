@@ -91,7 +91,17 @@ button{font-family:inherit}
 @media(max-width:900px){.app{grid-template-columns:1fr}}
 .sidebar{position:sticky;top:0;height:100svh;background:var(--night);color:oklch(0.82 0.01 250);
   display:flex;flex-direction:column;padding:22px 16px;gap:6px}
-@media(max-width:900px){.sidebar{display:none}}
+@media(max-width:900px){
+  .sidebar{position:fixed;top:0;left:0;height:100svh;height:100dvh;width:min(86vw,300px);z-index:90;
+    transform:translateX(-100%);transition:transform .42s var(--ease);box-shadow:0 20px 60px -20px rgba(0,0,0,.55);will-change:transform;overflow-y:auto}
+  .sidebar.open{transform:none}
+}
+.drawer-backdrop{display:none}
+@media(max-width:900px){
+  .drawer-backdrop{display:block;position:fixed;inset:0;z-index:80;background:oklch(0.16 0.03 260 / 0);pointer-events:none;
+    transition:background .42s var(--ease)}
+  .drawer-backdrop.on{background:oklch(0.16 0.03 260 / .5);pointer-events:auto}
+}
 .sb-brand{display:flex;align-items:center;gap:11px;padding:8px 10px 18px}
 .sb-brand svg{width:36px;height:36px}
 .sb-brand b{font-family:"Bricolage Grotesque";font-weight:800;font-size:16px;color:#fff;letter-spacing:-.02em;line-height:1.05}
@@ -117,6 +127,15 @@ button{font-family:inherit}
 .tb-icon{width:40px;height:40px;border-radius:12px;border:1.5px solid var(--line-2);background:var(--card);display:grid;place-items:center;
   cursor:pointer;color:var(--ink);position:relative;transition:border-color .3s}
 .tb-icon:hover{border-color:var(--ink)}
+.tb-burger{display:none}
+@media(max-width:900px){
+  .tb-burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;flex:0 0 auto;
+    border:1.5px solid var(--line-2);background:var(--card);border-radius:12px;cursor:pointer;padding:0 10px}
+  .tb-burger span{height:2px;background:var(--ink);border-radius:2px;transition:transform .35s var(--ease),opacity .3s}
+  .tb-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .tb-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .tb-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+}
 .tb-icon .dot{position:absolute;top:9px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--clay);border:2px solid var(--card)}
 .lang{display:inline-flex;border:1.5px solid var(--line-2);border-radius:100px;overflow:hidden;font-family:"JetBrains Mono";font-size:12px;font-weight:700}
 .lang button{background:transparent;border:0;color:var(--faint);padding:8px 11px;cursor:pointer;transition:.3s}
@@ -334,20 +353,6 @@ input[type=range]{width:100%;accent-color:var(--clay)}
 #toast.show{transform:translateX(-50%) translateY(0)}
 #toast .ti{width:26px;height:26px;border-radius:8px;background:var(--court);display:grid;place-items:center;flex:0 0 auto}
 
-/* bottom nav (mobile) */
-.botnav{display:none}
-@media(max-width:900px){
-  .botnav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:60;background:var(--card);
-    border-top:1px solid var(--line);box-shadow:0 -8px 24px -12px rgba(20,22,40,.25);
-    padding:8px 6px calc(10px + env(safe-area-inset-bottom));justify-content:space-around}
-  /* fill the strip iOS Safari exposes below the bar when its toolbar animates */
-  .botnav::after{content:"";position:absolute;top:calc(100% - 1px);left:0;right:0;height:150px;background:var(--card);pointer-events:none}
-  .botnav button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--faint);
-    font-size:10px;font-weight:600;cursor:pointer;padding:5px 8px;border-radius:10px;flex:1}
-  .botnav button svg{width:22px;height:22px}
-  .botnav button.on{color:var(--clay)}
-  .content{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
-}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -404,6 +409,7 @@ input[type=range]{width:100%;accent-color:var(--clay)}
 
   <div class="content">
     <div class="topbar">
+      <button class="tb-burger" id="tbBurger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
       <h1 id="pageTitle" data-i18n="nv_dash">Dashboard</h1>
       <div class="spacer"></div>
       <div class="lang" role="group" aria-label="Lingua"><button data-lang="it" class="on">IT</button><button data-lang="en">EN</button></div>
@@ -657,14 +663,7 @@ input[type=range]{width:100%;accent-color:var(--clay)}
   </div>
 </div>
 
-<!-- bottom nav -->
-<nav class="botnav" id="botnav">
-  <button class="on" data-nav="dashboard"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="3" width="8" height="5" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="11" width="8" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="8" height="7" rx="2" stroke="currentColor" stroke-width="1.8"/></svg><span data-i18n="nv_dash_s">Home</span></button>
-  <button data-nav="ranking"><svg viewBox="0 0 24 24" fill="none"><path d="M8 21h8M12 17v4M6 4h12v5a6 6 0 01-12 0V4z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="nv_rank_s">Ranking</span></button>
-  <button data-nav="match"><svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="10" r="2.6" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="nv_match_s">Partita</span></button>
-  <button data-nav="book"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="1.8"/></svg><span data-i18n="nv_book_s">Campo</span></button>
-  <button data-nav="stats"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V9M10 20V4M16 20v-7M22 20H2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-i18n="nv_stats_s">Stats</span></button>
-</nav>
+<div class="drawer-backdrop" id="drawerBd"></div>
 
 <div id="toast"><span class="ti"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span id="toastMsg">Fatto</span></div>
 
@@ -740,6 +739,20 @@ function go(view){
   if(view==='profile'){setTimeout(()=>{const p=document.getElementById('lvlProg');if(p)p.style.width=(RM?p.dataset.w:p.dataset.w)+'%';},60);}
 }
 document.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.nav)));
+
+/* ================= mobile drawer ================= */
+(function(){
+  const burger=document.getElementById('tbBurger'),sb=document.querySelector('.sidebar'),bd=document.getElementById('drawerBd');
+  if(!burger||!sb||!bd)return;
+  function set(open){sb.classList.toggle('open',open);bd.classList.toggle('on',open);burger.setAttribute('aria-expanded',open);
+    document.body.style.overflow=open?'hidden':'';}
+  burger.addEventListener('click',()=>set(!sb.classList.contains('open')));
+  bd.addEventListener('click',()=>set(false));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false);});
+  // close after choosing a destination (nav items + logout live inside the drawer)
+  sb.querySelectorAll('[data-nav],#logout').forEach(b=>b.addEventListener('click',()=>set(false)));
+  window.__closeDrawer=()=>set(false);
+})();
 
 /* ================= data ================= */
 const av=(s)=>s;
