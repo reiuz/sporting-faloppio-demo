@@ -1,0 +1,396 @@
+<title>Proposta Sporting Faloppio</title>
+<meta name="description" content="Preventivo per la piattaforma digitale dello Sporting Faloppio: sito, area soci e app iOS/Android, con prezzo per modulo e canone annuo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* committed single light theme, painted explicitly */
+:root{
+  --bg:#ffffff;
+  --surface:#F7F5F1;
+  --surface-2:#F1EEE8;
+  --ink:#26262E;
+  --muted:#5B5A64;
+  --faint:#8B8880;
+  --line:#E7E3DC;
+  --line-2:#D8D3CA;
+  --clay:#C6512B;
+  --clay-deep:#A63F1F;
+  --clay-wash:#FBEDE6;
+  --court:#3E6B4F;
+  --court-wash:#EAF1EC;
+  --gold:#C79212;
+  --gold-wash:#FBF1D8;
+  --night:#211D1B;
+  --maxw:960px;
+  --gut:clamp(18px,5vw,52px);
+  --r:14px;--r-lg:20px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --shadow:0 1px 2px rgba(30,26,22,.04),0 14px 34px -16px rgba(30,26,22,.16);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.62;
+  -webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;line-height:1.04;letter-spacing:-.022em;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gut)}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);font-weight:700}
+
+/* top strip */
+.topbar{border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);background:rgba(255,255,255,.9);backdrop-filter:blur(10px);z-index:10}
+.topbar .in{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:60px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand svg{width:30px;height:30px;flex:0 0 auto}
+.brand b{font-family:"Bricolage Grotesque";font-weight:800;font-size:15px;letter-spacing:-.01em}
+.brand span{font-family:"JetBrains Mono";font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--clay);display:block}
+.topbar .meta{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+@media(max-width:520px){.topbar .meta{display:none}}
+
+/* hero */
+.hero{padding-block:clamp(48px,8vw,90px) clamp(36px,6vw,64px)}
+.hero h1{font-size:clamp(2.5rem,7vw,4.4rem);margin-top:18px;max-width:15ch}
+.hero h1 em{font-style:normal;color:var(--clay)}
+.hero .lede{font-size:clamp(17px,2.2vw,21px);color:var(--muted);max-width:56ch;margin-top:22px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:.5em;font-weight:600;font-size:15px;padding:13px 22px;border-radius:100px;
+  border:1.6px solid transparent;cursor:pointer;text-decoration:none;transition:transform .4s var(--ease),background .3s,border-color .3s}
+.btn-primary{background:var(--clay);color:#fff}
+.btn-primary:hover{background:var(--clay-deep);transform:translateY(-2px)}
+.btn-ghost{border-color:var(--line-2);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--ink)}
+.demo-note{font-size:13.5px;color:var(--faint)}
+.demo-note b{color:var(--court);font-weight:700}
+
+/* section */
+section{padding-block:clamp(40px,6vw,64px);border-top:1px solid var(--line)}
+.sec-head{margin-bottom:30px}
+.sec-head h2{font-size:clamp(1.7rem,4vw,2.5rem)}
+.sec-head p{color:var(--muted);margin-top:12px;max-width:60ch}
+
+/* what we build */
+.builds{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.build{border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;background:var(--bg)}
+.build .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;margin-bottom:16px}
+.build h3{font-size:1.25rem}
+.build ul{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:9px}
+.build li{display:flex;gap:10px;font-size:14.5px;color:var(--muted)}
+.build li svg{flex:0 0 auto;color:var(--court);margin-top:3px}
+
+/* price tables */
+.ptable-wrap{overflow-x:auto}
+.ptable{width:100%;border-collapse:collapse;font-size:15px;min-width:420px}
+.ptable caption{text-align:left;font-family:"JetBrains Mono";font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);font-weight:700;padding-bottom:12px}
+.ptable td{padding:13px 4px;border-bottom:1px solid var(--line)}
+.ptable td.mod{color:var(--ink)}
+.ptable td.amt{text-align:right;font-family:"JetBrains Mono";font-weight:700;white-space:nowrap;color:var(--ink)}
+.ptable tr.sub td{border-top:2px solid var(--ink);border-bottom:1px solid var(--line);padding-top:13px;color:var(--muted)}
+.ptable tr.sub td.amt{color:var(--muted);font-weight:700}
+.ptable tr.disc td{border-bottom:1px solid var(--line)}
+.ptable tr.disc td.mod,.ptable tr.disc td.amt{color:var(--court);font-weight:700}
+.ptable tr.tot td{border-bottom:0;border-top:0;padding-top:14px;font-weight:700}
+.ptable tr.tot td.mod{font-family:"Bricolage Grotesque";font-size:1.05rem}
+.ptable tr.tot td.amt{font-size:1.15rem;color:var(--clay)}
+.rtag{display:inline-block;font-family:"JetBrains Mono";font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:2px 7px;border-radius:100px;margin-left:8px;white-space:nowrap;vertical-align:middle}
+.rtag.req{background:var(--clay-wash);color:var(--clay-deep)}
+.rtag.opt{background:var(--surface-2);color:var(--faint)}
+.ptable td .barr{color:var(--faint);font-family:"JetBrains Mono"}
+.ptable td.inc{color:var(--court);font-weight:700;font-family:"JetBrains Mono"}
+.combo{border:1.7px solid var(--clay);border-radius:16px;padding:14px 20px 18px;background:var(--clay-wash)}
+.combo-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.combo-h .badge{font-family:"JetBrains Mono";font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;background:var(--clay);color:#fff;padding:4px 11px;border-radius:100px}
+.combo-h .save{font-size:14px;color:var(--clay-deep);font-weight:600}
+.combo .ptable td{border-bottom-color:rgba(198,81,43,.18)}
+.combo .ptable tr.sub td{border-top-color:var(--clay-deep)}
+.combo .ptable caption{color:var(--clay-deep)}
+.legend-rows{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px;font-size:13px;color:var(--muted)}
+.legend-rows span{display:inline-flex;align-items:center;gap:7px}
+
+/* detail list */
+.detail-list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.detail{padding:18px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:230px 1fr;gap:clamp(12px,3vw,32px);align-items:start}
+@media(max-width:640px){.detail{grid-template-columns:1fr;gap:5px}}
+.detail .dt{font-family:"Bricolage Grotesque";font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+.detail .dd{color:var(--muted);font-size:14.5px;max-width:62ch}
+
+/* canone tiers */
+.tiers{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.tier{display:inline-flex;flex-direction:column;background:rgba(255,255,255,.6);border:1px solid var(--court);border-radius:12px;padding:10px 15px}
+.tier span{font-size:12px;color:var(--court);font-family:"JetBrains Mono";letter-spacing:.04em}
+.tier b{font-family:"Bricolage Grotesque";font-weight:800;font-size:1.35rem;color:var(--court)}
+.tables{display:grid;grid-template-columns:1fr;gap:40px}
+
+/* packages */
+.pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:760px){.pkgs{grid-template-columns:1fr}}
+.pkg{border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;background:var(--bg);display:flex;flex-direction:column;position:relative}
+.pkg.hot{border:1.6px solid var(--clay);box-shadow:0 24px 50px -26px rgba(198,81,43,.5)}
+.pkg .tag{position:absolute;top:-12px;left:24px;background:var(--clay);color:#fff;font-family:"JetBrains Mono";font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:5px 11px;border-radius:100px}
+.pkg h3{font-size:1.2rem}
+.pkg .sub{font-size:13px;color:var(--faint);margin-top:4px;min-height:2.6em}
+.pkg .price{font-family:"Bricolage Grotesque";font-weight:800;font-size:2.5rem;letter-spacing:-.03em;margin:14px 0 2px;line-height:1}
+.pkg .once{font-size:12.5px;color:var(--muted);font-family:"JetBrains Mono"}
+.pkg .save{display:inline-block;margin-top:10px;background:var(--court-wash);color:var(--court);font-family:"JetBrains Mono";font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px}
+.pkg .canone{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+.pkg .canone b{font-family:"JetBrains Mono";color:var(--ink)}
+
+/* included / excluded */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:720px){.two-col{grid-template-columns:1fr}}
+.panel{border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;background:var(--surface)}
+.panel.incl{background:var(--court-wash);border-color:transparent}
+.panel h3{font-size:1.15rem;display:flex;align-items:center;gap:9px}
+.panel .amt{font-family:"JetBrains Mono";font-weight:700;color:var(--court)}
+.panel ul{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-direction:column;gap:11px}
+.panel li{display:flex;gap:10px;font-size:14.5px;color:var(--ink)}
+.panel.incl li svg{color:var(--court)}
+.panel.excl li svg{color:var(--faint)}
+.panel li svg{flex:0 0 auto;margin-top:3px}
+.panel .fine{font-size:13px;color:var(--muted);margin-top:14px}
+
+/* how it works */
+.tech{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.tech .t{padding:20px;border:1px solid var(--line);border-radius:var(--r);background:var(--bg)}
+.tech .t b{font-family:"Bricolage Grotesque";font-weight:800;font-size:1.6rem;color:var(--clay);display:block}
+.tech .t span{font-size:13.5px;color:var(--muted);display:block;margin-top:4px}
+
+/* phases (real sequence -> numbers earned) */
+.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:ph}
+@media(max-width:720px){.phases{grid-template-columns:1fr 1fr}}
+@media(max-width:440px){.phases{grid-template-columns:1fr}}
+.phase{border-top:2px solid var(--clay);padding-top:14px}
+.phase .n{font-family:"JetBrains Mono";font-size:12px;font-weight:700;color:var(--clay)}
+.phase b{display:block;font-family:"Bricolage Grotesque";font-weight:700;font-size:1.05rem;margin-top:6px}
+.phase span{font-size:13.5px;color:var(--muted);display:block;margin-top:5px}
+
+/* closing */
+.close{background:var(--night);color:#fff;border-radius:var(--r-lg);padding:clamp(32px,6vw,56px);text-align:center;margin-block:8px}
+.close h2{color:#fff;font-size:clamp(1.8rem,4.5vw,3rem)}
+.close p{color:rgba(255,255,255,.78);margin:14px auto 0;max-width:48ch}
+.close .btn-primary{background:#fff;color:var(--clay-deep);margin-top:26px}
+.close .btn-primary:hover{background:var(--gold);color:var(--night)}
+
+footer{padding-block:34px 46px;color:var(--faint);font-family:"JetBrains Mono";font-size:11.5px;letter-spacing:.08em;text-align:center;border-top:1px solid var(--line)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="topbar">
+  <div class="wrap in">
+    <span class="brand">
+      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="#C6512B"/><ellipse cx="24" cy="20" rx="10" ry="12" fill="none" stroke="#fff" stroke-width="2.6"/><path d="M24 32V44" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="35" cy="13" r="4.4" fill="#C79212"/></svg>
+      <span><b>Sporting Faloppio</b><span>Proposta digitale</span></span>
+    </span>
+    <span class="meta">Preventivo riservato</span>
+  </div>
+</div>
+
+<header class="hero wrap">
+  <span class="eyebrow">Proposta di collaborazione</span>
+  <h1>Lo Sporting, <em>tutto online.</em></h1>
+  <p class="lede">Un sito nuovo, un'area soci che trasforma il circolo in un gioco, e la stessa cosa come app su iPhone e Android. Un solo sistema, gestito da voi, con prenotazioni e pagamenti sul campo.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="https://reiuz.github.io/sporting-faloppio-demo/" target="_blank" rel="noopener">Guarda la demo dal vivo
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <span class="demo-note"><b>Già online:</b> sito + area soci navigabili, la stessa che diventa app.</span>
+  </div>
+</header>
+
+<!-- COSA REALIZZIAMO -->
+<section class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Cosa realizziamo</span>
+    <h2>Tre cose, un solo motore.</h2>
+    <p>Il sito, l'area soci e l'app condividono lo stesso cervello: quello che succede su un campo, sul telefono di un socio e sul sito è sempre lo stesso dato, aggiornato in tempo reale.</p>
+  </div>
+  <div class="builds">
+    <div class="build">
+      <div class="ic" style="background:var(--clay-wash);color:var(--clay-deep)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 8h18M8 21h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <h3>Il sito</h3>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Redesign responsive con animazioni</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Attivit&agrave;, tariffe e staff reali</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Italiano e inglese</li>
+      </ul>
+    </div>
+    <div class="build">
+      <div class="ic" style="background:var(--court-wash);color:var(--court)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 21h8M12 17v4M6 4h12v5a6 6 0 01-12 0V4z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>L'area soci</h3>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Iscrizione, profilo e livello di gioco</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Iscrizione ai corsi e gestione iscritti</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Circuito D-Match: sfide, classifica, premi</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Trova partita per livello e disponibilità</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Prenotazione campi con pagamento online</li>
+      </ul>
+    </div>
+    <div class="build">
+      <div class="ic" style="background:var(--gold-wash);color:var(--gold)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="6" y="2" width="12" height="20" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M11 18h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <h3>L'app</h3>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>iPhone e Android, un solo codice</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Notifiche push: match trovato, sfida, promemoria</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Sugli store Apple e Google</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PREZZI PER MODULO -->
+<section class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Prezzi per modulo</span>
+    <h2>Trasparenza, voce per voce.</h2>
+    <p>Ogni funzione ha il suo costo, voce per voce. Il sistema riconosce chi &egrave; socio e chi no: cos&igrave; potete applicare tariffe diverse, per esempio il campo che costa meno ai tesserati.</p>
+  </div>
+  <div class="tables">
+    <div class="ptable-wrap">
+      <table class="ptable">
+        <caption>Sito + Area soci (web)</caption>
+        <tbody>
+          <tr><td class="mod">Area soci: iscrizione, profilo, livello</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Iscrizione corsi e gestione iscritti</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Prenotazione campi</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Redesign sito vetrina</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Statistiche + pannello gestione</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Circuito D-Match (ranking, sfide, premi)</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Pagamento online (Stripe)</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Trova partita (matchmaking)</td><td class="amt inc">&#10003;</td></tr>
+          <tr class="sub"><td class="mod">Subtotale</td><td class="amt">5.600 &euro;</td></tr>
+          <tr class="disc"><td class="mod">Sconto</td><td class="amt">&minus;600 &euro;</td></tr>
+          <tr class="tot"><td class="mod">Totale web</td><td class="amt">5.000 &euro;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ptable-wrap">
+      <table class="ptable">
+        <caption>App iPhone + Android</caption>
+        <tbody>
+          <tr><td class="mod">Base app iOS + Android, sono due app (setup, navigazione, login)</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Area soci: iscrizione, profilo, livello</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Notifiche push</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Prenotazione campi</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Statistiche</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Circuito D-Match (ranking, sfide, premi)</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Pagamenti (Stripe)</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Trova partita (matchmaking)</td><td class="amt inc">&#10003;</td></tr>
+          <tr class="sub"><td class="mod">Subtotale</td><td class="amt">8.000 &euro;</td></tr>
+          <tr class="disc"><td class="mod">Sconto</td><td class="amt">&minus;1.000 &euro;</td></tr>
+          <tr class="tot"><td class="mod">Totale app</td><td class="amt">7.000 &euro;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="combo">
+      <div class="combo-h"><span class="badge">Consigliato</span><span class="save">Tutto insieme: 8.500 &euro; invece di 12.000 &euro;</span></div>
+      <div class="ptable-wrap">
+      <table class="ptable">
+        <caption>Web + App completo</caption>
+        <tbody>
+          <tr><td class="mod">App iPhone + Android completa (tutta l'area soci)</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Notifiche push</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Redesign sito vetrina (sito pubblico)</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Iscrizione corsi e gestione iscritti</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Prenotazione campi, D-Match, statistiche, pagamenti, trova partita</td><td class="amt inc">&#10003;</td></tr>
+          <tr class="sub"><td class="mod">Subtotale</td><td class="amt">9.700 &euro;</td></tr>
+          <tr class="disc"><td class="mod">Sconto</td><td class="amt">&minus;1.200 &euro;</td></tr>
+          <tr class="tot"><td class="mod">Totale Web + App</td><td class="amt">8.500 &euro;</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DETTAGLIO FUNZIONI -->
+<section class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Le funzioni in dettaglio</span>
+    <h2>Cosa fa, in concreto.</h2>
+  </div>
+  <div class="detail-list">
+    <div class="detail"><div class="dt">Area soci</div><div class="dd">L'accesso riservato: ogni socio si iscrive, crea il profilo e riceve un livello di gioco, assegnato dal maestro e poi aggiornato in automatico dai risultati delle partite. Gestisce anche il tesseramento (quota socio) e distingue soci da non soci.</div></div>
+    <div class="detail"><div class="dt">Iscrizione corsi e gestione iscritti</div><div class="dd">I genitori iscrivono i figli ai corsi online e pagano subito con carta, senza pi&ugrave; bonifico e IBAN via email. Lo staff ha la dashboard degli iscritti: chi si &egrave; iscritto, a quale corso, chi ha pagato e chi no, con i certificati medici. Sostituisce il modulo e il tracciamento a mano.</div></div>
+    <div class="detail"><div class="dt">Redesign sito vetrina</div><div class="dd">Il sito nuovo, veloce e responsive, con le vostre attivit&agrave;, tariffe e staff reali, in italiano e inglese. La vetrina pubblica del circolo, quella che vedono anche i non soci.</div></div>
+    <div class="detail"><div class="dt">Prenotazione campi</div><div class="dd">Griglia oraria dei campi sempre aggiornata: il socio prenota, invita l'avversario, e lo staff vede tutto in tempo reale. I soci pagano una tariffa agevolata, i non soci di pi&ugrave;.</div></div>
+    <div class="detail"><div class="dt">Statistiche e pannello gestione</div><div class="dd">I numeri del circolo e di ogni socio (ore giocate, vittorie, chi &egrave; pi&ugrave; attivo) e il pannello con cui lo staff gestisce soci, tornei e prenotazioni.</div></div>
+    <div class="detail"><div class="dt">Circuito D-Match</div><div class="dd">Il campionato interno digitale: sfide, classifica e premi di stagione. La classifica usa il punteggio <b>ELO</b>, lo stesso sistema degli scacchi: il punteggio sale quando batti un avversario pi&ugrave; forte e scende quando perdi con uno pi&ugrave; debole, cos&igrave; resta sempre giusto. Trasforma le partite in una gara che tiene i soci sul campo.</div></div>
+    <div class="detail"><div class="dt">Pagamenti (Stripe)</div><div class="dd">Il socio paga la prenotazione online con carta. Gli incassi arrivano diretti sul conto del circolo, senza contanti da gestire a mano.</div></div>
+    <div class="detail"><div class="dt">Trova partita</div><div class="dd">Il socio segna quando vuole giocare e il sistema lo abbina a un avversario del suo livello e con la sua stessa disponibilit&agrave;. Meno telefonate, pi&ugrave; partite.</div></div>
+    <div class="detail"><div class="dt">App e notifiche push</div><div class="dd">La stessa area soci come app su iPhone e Android. Le notifiche push (match trovato, sfida ricevuta, promemoria prenotazione) arrivano dirette sul telefono del socio.</div></div>
+  </div>
+</section>
+
+<!-- CANONE / ESTERNI -->
+<section class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Costi ricorrenti</span>
+    <h2>Cosa comprende il canone.</h2>
+  </div>
+  <div class="two-col">
+    <div class="panel incl">
+      <h3>Nel canone</h3>
+      <div class="tiers">
+        <span class="tier"><span>Solo sito web</span><b>300&euro;/anno</b></span>
+        <span class="tier"><span>Con l'app</span><b>400&euro;/anno</b></span>
+      </div>
+      <ul>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Hosting e database in cloud</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Backup automatici dei dati</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Aggiornamenti e manutenzione</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Piccole modifiche stagionali (tariffe, corsi)</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Supporto per malfunzionamenti</li>
+      </ul>
+    </div>
+    <div class="panel excl">
+      <h3>Fuori dal canone</h3>
+      <ul>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8 12h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Commissioni sui pagamenti (Stripe, circa 1,5% + 0,25&euro; a transazione), trattenute sull'incassato del circolo</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8 12h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Nuove funzioni o progetti aggiuntivi, quotati a parte</li>
+      </ul>
+      <p class="fine">I pagamenti passano su un conto Stripe intestato al circolo: gli incassi arrivano direttamente a voi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COME FUNZIONA -->
+<section class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Come funziona</span>
+    <h2>Costruito per durare e crescere.</h2>
+    <p>Un'unica infrastruttura cloud alimenta web e app. Nessun server da gestire, e regge senza problemi la crescita del circolo.</p>
+  </div>
+  <div class="tech">
+    <div class="t"><b>1</b><span>Un solo backend per sito e app: stesso login, stessi dati</span></div>
+    <div class="t"><b>1.000+</b><span>soci gestibili con l'infrastruttura prevista</span></div>
+    <div class="t"><b>0&euro;</b><span>server: tutto su piattaforme cloud gestite</span></div>
+    <div class="t"><b>iOS + Android</b><span>da un unico codice, meno costi di manutenzione</span></div>
+  </div>
+</section>
+
+<!-- FASI -->
+<section class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Come procediamo</span>
+    <h2>Quattro fasi, dall'accordo alla pubblicazione.</h2>
+  </div>
+  <div class="phases">
+    <div class="phase"><span class="n">Fase 1</span><b>Design e contenuti</b><span>Grafica, testi, foto reali del circolo e struttura dei dati.</span></div>
+    <div class="phase"><span class="n">Fase 2</span><b>Sviluppo</b><span>Sito, area soci, pagamenti e app, sullo stesso backend.</span></div>
+    <div class="phase"><span class="n">Fase 3</span><b>Test</b><span>Prove reali con qualche socio, correzioni e messa a punto.</span></div>
+    <div class="phase"><span class="n">Fase 4</span><b>Pubblicazione</b><span>Online, sugli store, con una breve formazione allo staff.</span></div>
+  </div>
+</section>
+
+<!-- CHIUSURA -->
+<section class="wrap" style="border-top:0">
+  <div class="close">
+    <h2>Proviamo la demo insieme.</h2>
+    <p>Il sito e l'area soci sono già navigabili. Guardateli, poi decidiamo da dove partire.</p>
+    <a class="btn btn-primary" href="https://reiuz.github.io/sporting-faloppio-demo/" target="_blank" rel="noopener">Apri la demo
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</section>
+
+<footer>Preventivo riservato &middot; Sporting Faloppio</footer>

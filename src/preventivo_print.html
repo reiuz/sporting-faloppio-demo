@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Preventivo Sporting Faloppio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --ink:#26262E;--muted:#5B5A64;--faint:#8B8880;--line:#E1DDD5;
+  --clay:#C6512B;--clay-deep:#A63F1F;--clay-wash:#FBEDE6;--court:#3E6B4F;--court-wash:#EAF1EC;--surface:#F7F5F1;
+}
+*{box-sizing:border-box}
+@page{size:A4;margin:15mm 15mm 14mm 15mm}
+html,body{margin:0;padding:0}
+body{font-family:"Hanken Grotesk",system-ui,sans-serif;color:var(--ink);font-size:10.5pt;line-height:1.5;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3{margin:0;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;letter-spacing:-.01em;line-height:1.05}
+p{margin:0}
+.mono{font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums}
+.page{max-width:180mm;margin:0 auto}
+
+/* header */
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;border-bottom:2px solid var(--ink);padding-bottom:12px}
+.emit{display:flex;gap:11px;align-items:center}
+.emit svg{width:38px;height:38px;flex:0 0 auto}
+.emit b{font-family:"Bricolage Grotesque";font-weight:800;font-size:14pt;display:block}
+.emit span{font-size:8.5pt;color:var(--muted)}
+.docmeta{text-align:right}
+.docmeta .t{font-family:"Bricolage Grotesque";font-weight:800;font-size:20pt;color:var(--clay);letter-spacing:.02em}
+.docmeta .m{font-family:"JetBrains Mono";font-size:8.5pt;color:var(--muted);margin-top:4px;line-height:1.6}
+
+/* to / object */
+.meta-row{display:flex;justify-content:space-between;gap:24px;margin-top:16px}
+.lbl{font-family:"JetBrains Mono";font-size:7.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);font-weight:700;margin-bottom:4px}
+.dest b{font-size:11pt;font-family:"Bricolage Grotesque";font-weight:700}
+.dest p{font-size:9.5pt;color:var(--muted)}
+.obj{max-width:95mm;text-align:right}
+.obj p{font-size:9.5pt;color:var(--muted)}
+
+/* options */
+.opts{display:flex;gap:12px;margin-top:20px}
+.opt{flex:1;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.opt .oh{background:var(--surface);padding:11px 14px;border-bottom:1px solid var(--line)}
+.opt.hl .oh{background:var(--clay-wash)}
+.opt .oh h3{font-size:12pt}
+.opt .oh .sub{font-size:8pt;color:var(--muted);margin-top:2px}
+.opt .ob{padding:12px 14px}
+.opt ul{list-style:none;margin:0 0 12px;padding:0}
+.opt li{display:flex;gap:7px;font-size:9pt;color:var(--ink);padding:2.5px 0}
+.opt li .ck{color:var(--court);font-weight:700;font-family:"JetBrains Mono";flex:0 0 auto}
+.totrow{display:flex;justify-content:space-between;font-size:9pt;color:var(--muted);padding:2px 0}
+.totrow.disc{color:var(--court);font-weight:700}
+.totrow.grand{border-top:1.5px solid var(--ink);margin-top:6px;padding-top:8px;font-size:11.5pt;color:var(--ink);font-weight:800}
+.totrow.grand .v{font-family:"Bricolage Grotesque";color:var(--clay);font-size:15pt}
+.totrow .v{font-family:"JetBrains Mono";font-weight:700}
+.canone{margin-top:10px;background:var(--court-wash);border-radius:7px;padding:9px 12px;display:flex;justify-content:space-between;align-items:center}
+.canone .cl{font-size:8.5pt;color:var(--court)}
+.canone b{font-family:"Bricolage Grotesque";font-weight:800;color:var(--court);font-size:12pt}
+
+/* combo featured + alternatives */
+.combo-feat{border:1.7px solid var(--clay);border-radius:10px;overflow:hidden;margin-top:18px}
+.cf-head{background:var(--clay);color:#fff;padding:7px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.cf-badge{font-family:"JetBrains Mono";font-size:8pt;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.cf-save{font-family:"Bricolage Grotesque";font-weight:800;font-size:10.5pt}
+.cf-body{display:flex;gap:18px;padding:13px 16px;background:var(--clay-wash)}
+.cf-left{flex:1.35}
+.cf-left h3{font-size:14pt}
+.cf-left p{font-size:9pt;color:var(--muted);margin-top:5px}
+.cf-right{flex:1;border-left:1px solid rgba(198,81,43,.25);padding-left:16px}
+.alt-label{font-family:"JetBrains Mono";font-size:7.5pt;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin:15px 0 8px;font-weight:700}
+.alt-row{display:flex;gap:12px}
+.alt{flex:1;border:1px solid var(--line);border-radius:8px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.alt b{font-family:"Bricolage Grotesque";font-weight:700;font-size:11pt;display:block}
+.alt span{font-size:8pt;color:var(--muted)}
+.alt-price{font-family:"JetBrains Mono";font-weight:700;font-size:11pt;color:var(--clay);white-space:nowrap;text-align:right}
+.alt-price em{font-style:normal;display:block;font-size:8pt;color:var(--muted);font-weight:500}
+
+/* conditions */
+.cond{margin-top:20px;border-top:1px solid var(--line);padding-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cond h4{font-family:"JetBrains Mono";font-size:8pt;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);font-weight:700;margin:0 0 7px}
+.cond ul{list-style:none;margin:0;padding:0}
+.cond li{font-size:9pt;color:var(--muted);padding:2px 0;display:flex;gap:7px}
+.cond li::before{content:"–";color:var(--faint)}
+.note{margin-top:16px;font-size:8.5pt;color:var(--faint);line-height:1.5}
+
+/* sign */
+.sign{display:flex;justify-content:space-between;gap:30px;margin-top:26px}
+.sign .box{flex:1}
+.sign .line{border-bottom:1px solid var(--ink);height:34px}
+.sign .cap{font-size:8pt;color:var(--muted);margin-top:5px}
+
+.foot{margin-top:20px;border-top:1px solid var(--line);padding-top:8px;text-align:center;font-family:"JetBrains Mono";font-size:7.5pt;letter-spacing:.06em;color:var(--faint)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="head">
+    <div class="emit">
+      <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="23" fill="#C6512B"/><ellipse cx="24" cy="20" rx="10" ry="12" fill="none" stroke="#fff" stroke-width="2.6"/><path d="M24 32V44" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="35" cy="13" r="4.4" fill="#C79212"/></svg>
+      <div><b>Fabio La Ganga</b><span>Sviluppo siti web e app &middot; fabio.laganga@gmail.com</span></div>
+    </div>
+    <div class="docmeta">
+      <div class="t">PREVENTIVO</div>
+      <div class="m">N. SF-2026-01<br>Data 22/09/2026</div>
+    </div>
+  </div>
+
+  <div class="meta-row">
+    <div class="dest">
+      <div class="lbl">Spett.le</div>
+      <b>Sporting Faloppio</b>
+      <p>Via Giovanni Falcone, 2<br>22020 Faloppio (CO)</p>
+    </div>
+    <div class="obj">
+      <div class="lbl">Oggetto</div>
+      <p>Piattaforma digitale del circolo: sito, area soci e app iPhone/Android. Prenotazioni, iscrizioni ai corsi e pagamenti online.</p>
+    </div>
+  </div>
+
+  <div class="combo-feat">
+    <div class="cf-head"><span class="cf-badge">Consigliato &middot; tutto insieme</span><span class="cf-save">8.500 &euro; invece di 12.000 &euro;</span></div>
+    <div class="cf-body">
+      <div class="cf-left">
+        <h3>Web + App completo</h3>
+        <p>App iPhone + Android con tutta l'area soci (prenotazioni, D-Match, statistiche, pagamenti, trova partita), pi&ugrave; il sito pubblico e l'iscrizione corsi online con gestione iscritti.</p>
+      </div>
+      <div class="cf-right">
+        <div class="totrow"><span>Subtotale</span><span class="v">9.700 &euro;</span></div>
+        <div class="totrow disc"><span>Sconto</span><span class="v">&minus;1.200 &euro;</span></div>
+        <div class="totrow grand"><span>Totale</span><span class="v">8.500 &euro;</span></div>
+        <div class="canone"><span class="cl">Canone annuo</span><b>400 &euro;/anno</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alt-label">In alternativa, presi singolarmente</div>
+  <div class="opts">
+    <div class="opt">
+      <div class="oh"><h3>Sito + Area soci</h3><div class="sub">Tutto sul web, da qualsiasi dispositivo</div></div>
+      <div class="ob">
+        <ul>
+          <li><span class="ck">&#10003;</span> Area soci: iscrizione, profilo, livello</li>
+          <li><span class="ck">&#10003;</span> Iscrizione corsi e gestione iscritti</li>
+          <li><span class="ck">&#10003;</span> Prenotazione campi</li>
+          <li><span class="ck">&#10003;</span> Redesign sito vetrina</li>
+          <li><span class="ck">&#10003;</span> Statistiche e pannello gestione</li>
+          <li><span class="ck">&#10003;</span> Circuito D-Match (ranking, sfide, premi)</li>
+          <li><span class="ck">&#10003;</span> Pagamento online (Stripe)</li>
+          <li><span class="ck">&#10003;</span> Trova partita</li>
+        </ul>
+        <div class="totrow"><span>Subtotale</span><span class="v">5.600 &euro;</span></div>
+        <div class="totrow disc"><span>Sconto</span><span class="v">&minus;600 &euro;</span></div>
+        <div class="totrow grand"><span>Totale una tantum</span><span class="v">5.000 &euro;</span></div>
+        <div class="canone"><span class="cl">Canone annuo</span><b>300 &euro;/anno</b></div>
+      </div>
+    </div>
+    <div class="opt">
+      <div class="oh"><h3>App iPhone + Android</h3><div class="sub">La stessa area soci, nativa sui due store</div></div>
+      <div class="ob">
+        <ul>
+          <li><span class="ck">&#10003;</span> Base app iOS + Android (due app)</li>
+          <li><span class="ck">&#10003;</span> Area soci: iscrizione, profilo, livello</li>
+          <li><span class="ck">&#10003;</span> Notifiche push</li>
+          <li><span class="ck">&#10003;</span> Prenotazione campi</li>
+          <li><span class="ck">&#10003;</span> Statistiche</li>
+          <li><span class="ck">&#10003;</span> Circuito D-Match (ranking, sfide, premi)</li>
+          <li><span class="ck">&#10003;</span> Pagamenti (Stripe)</li>
+          <li><span class="ck">&#10003;</span> Trova partita</li>
+        </ul>
+        <div class="totrow"><span>Subtotale</span><span class="v">8.000 &euro;</span></div>
+        <div class="totrow disc"><span>Sconto</span><span class="v">&minus;1.000 &euro;</span></div>
+        <div class="totrow grand"><span>Totale una tantum</span><span class="v">7.000 &euro;</span></div>
+        <div class="canone"><span class="cl">Canone annuo</span><b>400 &euro;/anno</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cond">
+    <div>
+      <h4>Il canone comprende</h4>
+      <ul>
+        <li>Hosting e database in cloud</li>
+        <li>Backup automatici dei dati</li>
+        <li>Aggiornamenti e manutenzione</li>
+        <li>Piccole modifiche stagionali (tariffe, corsi)</li>
+        <li>Supporto per malfunzionamenti</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Non incluso</h4>
+      <ul>
+        <li>Commissioni sui pagamenti (Stripe, circa 1,5% + 0,25 &euro; a transazione), a carico del circolo</li>
+        <li>Nuove funzioni o progetti aggiuntivi, quotati a parte</li>
+      </ul>
+      <h4 style="margin-top:11px">Pagamento</h4>
+      <ul>
+        <li>Da concordare (es. acconto alla firma, saldo alla consegna)</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="note">I due pacchetti possono essere presi separatamente o insieme. Il sistema riconosce soci e non soci, con tariffe diverse (es. campo agevolato ai tesserati) e gestione del tesseramento. Demo navigabile online del sito e dell'area soci disponibile su richiesta.</p>
+
+  <div class="sign">
+    <div class="box"><div class="line"></div><div class="cap">Data e firma per accettazione (Sporting Faloppio)</div></div>
+    <div class="box"><div class="line"></div><div class="cap">Fabio La Ganga</div></div>
+  </div>
+
+  <div class="foot">Preventivo riservato &middot; Sporting Faloppio &middot; SF-2026-01</div>
+</div>
+</body>
+</html>
