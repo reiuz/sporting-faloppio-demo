@@ -91,7 +91,11 @@ section{padding-block:clamp(40px,6vw,64px);border-top:1px solid var(--line)}
 .ptable td{padding:13px 4px;border-bottom:1px solid var(--line)}
 .ptable td.mod{color:var(--ink)}
 .ptable td.amt{text-align:right;font-family:"JetBrains Mono";font-weight:700;white-space:nowrap;color:var(--ink)}
-.ptable tr.tot td{border-bottom:0;border-top:2px solid var(--ink);padding-top:14px;font-weight:700}
+.ptable tr.sub td{border-top:2px solid var(--ink);border-bottom:1px solid var(--line);padding-top:13px;color:var(--muted)}
+.ptable tr.sub td.amt{color:var(--muted);font-weight:700}
+.ptable tr.disc td{border-bottom:1px solid var(--line)}
+.ptable tr.disc td.mod,.ptable tr.disc td.amt{color:var(--court);font-weight:700}
+.ptable tr.tot td{border-bottom:0;border-top:0;padding-top:14px;font-weight:700}
 .ptable tr.tot td.mod{font-family:"Bricolage Grotesque";font-size:1.05rem}
 .ptable tr.tot td.amt{font-size:1.15rem;color:var(--clay)}
 .rtag{display:inline-block;font-family:"JetBrains Mono";font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:2px 7px;border-radius:100px;margin-left:8px;white-space:nowrap;vertical-align:middle}
@@ -113,8 +117,7 @@ section{padding-block:clamp(40px,6vw,64px);border-top:1px solid var(--line)}
 .tier{display:inline-flex;flex-direction:column;background:rgba(255,255,255,.6);border:1px solid var(--court);border-radius:12px;padding:10px 15px}
 .tier span{font-size:12px;color:var(--court);font-family:"JetBrains Mono";letter-spacing:.04em}
 .tier b{font-family:"Bricolage Grotesque";font-weight:800;font-size:1.35rem;color:var(--court)}
-.tables{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,52px)}
-@media(max-width:720px){.tables{grid-template-columns:1fr;gap:36px}}
+.tables{display:grid;grid-template-columns:1fr;gap:40px}
 
 /* packages */
 .pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -216,6 +219,7 @@ footer{padding-block:34px 46px;color:var(--faint);font-family:"JetBrains Mono";f
       <h3>L'area soci</h3>
       <ul>
         <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Iscrizione, profilo e livello di gioco</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Iscrizione ai corsi e gestione iscritti</li>
         <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Circuito D-Match: sfide, classifica, premi</li>
         <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Trova partita per livello e disponibilità</li>
         <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Prenotazione campi con pagamento online</li>
@@ -238,21 +242,24 @@ footer{padding-block:34px 46px;color:var(--faint);font-family:"JetBrains Mono";f
   <div class="sec-head">
     <span class="eyebrow">Prezzi per modulo</span>
     <h2>Trasparenza, voce per voce.</h2>
-    <p>Ogni funzione ha il suo costo. Le voci <b>obbligatorie</b> sono la base necessaria; le <b>feature</b> le componete voi. Non volete i pagamenti online? Togliete Stripe e il totale scende.</p>
+    <p>Ogni funzione ha il suo costo, voce per voce. Il sistema riconosce chi &egrave; socio e chi no: cos&igrave; potete applicare tariffe diverse, per esempio il campo che costa meno ai tesserati.</p>
   </div>
   <div class="tables">
     <div class="ptable-wrap">
       <table class="ptable">
         <caption>Sito + Area soci (web)</caption>
         <tbody>
-          <tr><td class="mod">Area soci: iscrizione, profilo, livello <span class="rtag req">obbligatoria</span></td><td class="amt">950 &euro;</td></tr>
-          <tr><td class="mod">Redesign sito vetrina <span class="rtag req">obbligatoria</span></td><td class="amt">600 &euro;</td></tr>
-          <tr><td class="mod">Prenotazione campi <span class="rtag opt">feature</span></td><td class="amt">900 &euro;</td></tr>
-          <tr><td class="mod">Statistiche + pannello gestione <span class="rtag opt">feature</span></td><td class="amt">350 &euro;</td></tr>
-          <tr><td class="mod">Circuito D-Match (ranking, sfide, premi) <span class="rtag opt">feature</span></td><td class="amt">700 &euro;</td></tr>
-          <tr><td class="mod">Pagamento online (Stripe) <span class="rtag opt">feature</span></td><td class="amt">500 &euro;</td></tr>
-          <tr><td class="mod">Trova partita (matchmaking) <span class="rtag opt">feature</span></td><td class="amt">500 &euro;</td></tr>
-          <tr class="tot"><td class="mod">Totale web</td><td class="amt">4.500 &euro;</td></tr>
+          <tr><td class="mod">Area soci: iscrizione, profilo, livello</td><td class="amt">950 &euro;</td></tr>
+          <tr><td class="mod">Iscrizione corsi e gestione iscritti</td><td class="amt">1.200 &euro;</td></tr>
+          <tr><td class="mod">Prenotazione campi</td><td class="amt">900 &euro;</td></tr>
+          <tr><td class="mod">Redesign sito vetrina</td><td class="amt">500 &euro;</td></tr>
+          <tr><td class="mod">Statistiche + pannello gestione</td><td class="amt">350 &euro;</td></tr>
+          <tr><td class="mod">Circuito D-Match (ranking, sfide, premi)</td><td class="amt">700 &euro;</td></tr>
+          <tr><td class="mod">Pagamento online (Stripe)</td><td class="amt">500 &euro;</td></tr>
+          <tr><td class="mod">Trova partita (matchmaking)</td><td class="amt">500 &euro;</td></tr>
+          <tr class="sub"><td class="mod">Subtotale</td><td class="amt">5.600 &euro;</td></tr>
+          <tr class="disc"><td class="mod">Sconto</td><td class="amt">&minus;600 &euro;</td></tr>
+          <tr class="tot"><td class="mod">Totale web</td><td class="amt">5.000 &euro;</td></tr>
         </tbody>
       </table>
     </div>
@@ -260,23 +267,21 @@ footer{padding-block:34px 46px;color:var(--faint);font-family:"JetBrains Mono";f
       <table class="ptable">
         <caption>App iPhone + Android</caption>
         <tbody>
-          <tr><td class="mod">Base app iOS + Android, sono due app (setup, navigazione, login) <span class="rtag req">obbligatoria</span></td><td class="amt">2.800 &euro;</td></tr>
-          <tr><td class="mod">Area soci: iscrizione, profilo, livello <span class="rtag req">obbligatoria</span></td><td class="amt">950 &euro;</td></tr>
-          <tr><td class="mod">Notifiche push <span class="rtag req">obbligatoria</span></td><td class="amt">800 &euro;</td></tr>
-          <tr><td class="mod">Prenotazione campi <span class="rtag opt">feature</span></td><td class="amt">900 &euro;</td></tr>
-          <tr><td class="mod">Statistiche <span class="rtag opt">feature</span></td><td class="amt">350 &euro;</td></tr>
-          <tr><td class="mod">Circuito D-Match (ranking, sfide, premi) <span class="rtag opt">feature</span></td><td class="amt">700 &euro;</td></tr>
-          <tr><td class="mod">Pagamenti (Stripe) <span class="rtag opt">feature</span></td><td class="amt">500 &euro;</td></tr>
-          <tr><td class="mod">Trova partita (matchmaking) <span class="rtag opt">feature</span></td><td class="amt">500 &euro;</td></tr>
-          <tr><td class="mod">Redesign sito vetrina <span class="rtag opt">feature</span></td><td class="amt"><s class="barr">600 &euro;</s> 300 &euro;</td></tr>
-          <tr class="tot"><td class="mod">Totale app</td><td class="amt">7.800 &euro;</td></tr>
+          <tr><td class="mod">Base app iOS + Android, sono due app (setup, navigazione, login)</td><td class="amt">2.800 &euro;</td></tr>
+          <tr><td class="mod">Area soci: iscrizione, profilo, livello</td><td class="amt">950 &euro;</td></tr>
+          <tr><td class="mod">Notifiche push</td><td class="amt">800 &euro;</td></tr>
+          <tr><td class="mod">Prenotazione campi</td><td class="amt">900 &euro;</td></tr>
+          <tr><td class="mod">Statistiche</td><td class="amt">350 &euro;</td></tr>
+          <tr><td class="mod">Circuito D-Match (ranking, sfide, premi)</td><td class="amt">700 &euro;</td></tr>
+          <tr><td class="mod">Pagamenti (Stripe)</td><td class="amt">500 &euro;</td></tr>
+          <tr><td class="mod">Trova partita (matchmaking)</td><td class="amt">500 &euro;</td></tr>
+          <tr><td class="mod">Redesign sito vetrina</td><td class="amt"><s class="barr">500 &euro;</s> 300 &euro;</td></tr>
+          <tr class="sub"><td class="mod">Subtotale</td><td class="amt">7.800 &euro;</td></tr>
+          <tr class="disc"><td class="mod">Sconto</td><td class="amt">&minus;800 &euro;</td></tr>
+          <tr class="tot"><td class="mod">Totale app</td><td class="amt">7.000 &euro;</td></tr>
         </tbody>
       </table>
     </div>
-  </div>
-  <div class="legend-rows">
-    <span><span class="rtag req">obbligatoria</span> la base necessaria</span>
-    <span><span class="rtag opt">feature</span> opzionale, la scegliete voi</span>
   </div>
 </section>
 
@@ -287,9 +292,10 @@ footer{padding-block:34px 46px;color:var(--faint);font-family:"JetBrains Mono";f
     <h2>Cosa fa, in concreto.</h2>
   </div>
   <div class="detail-list">
-    <div class="detail"><div class="dt">Area soci</div><div class="dd">L'accesso riservato: ogni socio si iscrive, crea il profilo e riceve un livello di gioco, assegnato dal maestro e poi aggiornato in automatico dai risultati delle partite.</div></div>
+    <div class="detail"><div class="dt">Area soci</div><div class="dd">L'accesso riservato: ogni socio si iscrive, crea il profilo e riceve un livello di gioco, assegnato dal maestro e poi aggiornato in automatico dai risultati delle partite. Gestisce anche il tesseramento (quota socio) e distingue soci da non soci.</div></div>
+    <div class="detail"><div class="dt">Iscrizione corsi e gestione iscritti</div><div class="dd">I genitori iscrivono i figli ai corsi online e pagano subito con carta, senza pi&ugrave; bonifico e IBAN via email. Lo staff ha la dashboard degli iscritti: chi si &egrave; iscritto, a quale corso, chi ha pagato e chi no, con i certificati medici. Sostituisce il modulo e il tracciamento a mano.</div></div>
     <div class="detail"><div class="dt">Redesign sito vetrina</div><div class="dd">Il sito nuovo, veloce e responsive, con le vostre attivit&agrave;, tariffe e staff reali, in italiano e inglese. La vetrina pubblica del circolo, quella che vedono anche i non soci.</div></div>
-    <div class="detail"><div class="dt">Prenotazione campi</div><div class="dd">Griglia oraria dei campi sempre aggiornata: il socio prenota, invita l'avversario, e lo staff vede tutto in tempo reale.</div></div>
+    <div class="detail"><div class="dt">Prenotazione campi</div><div class="dd">Griglia oraria dei campi sempre aggiornata: il socio prenota, invita l'avversario, e lo staff vede tutto in tempo reale. I soci pagano una tariffa agevolata, i non soci di pi&ugrave;.</div></div>
     <div class="detail"><div class="dt">Statistiche e pannello gestione</div><div class="dd">I numeri del circolo e di ogni socio (ore giocate, vittorie, chi &egrave; pi&ugrave; attivo) e il pannello con cui lo staff gestisce soci, tornei e prenotazioni.</div></div>
     <div class="detail"><div class="dt">Circuito D-Match</div><div class="dd">Il campionato interno digitale: sfide, classifica e premi di stagione. La classifica usa il punteggio <b>ELO</b>, lo stesso sistema degli scacchi: il punteggio sale quando batti un avversario pi&ugrave; forte e scende quando perdi con uno pi&ugrave; debole, cos&igrave; resta sempre giusto. Trasforma le partite in una gara che tiene i soci sul campo.</div></div>
     <div class="detail"><div class="dt">Pagamenti (Stripe)</div><div class="dd">Il socio paga la prenotazione online con carta. Gli incassi arrivano diretti sul conto del circolo, senza contanti da gestire a mano.</div></div>
