@@ -174,6 +174,13 @@ section{padding-block:clamp(40px,6vw,64px);border-top:1px solid var(--line)}
 
 footer{padding-block:34px 46px;color:var(--faint);font-family:"JetBrains Mono";font-size:11.5px;letter-spacing:.08em;text-align:center;border-top:1px solid var(--line)}
 
+/* gains (benefici per il circolo) */
+.gains{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+@media(max-width:560px){.gains{grid-template-columns:1fr}}
+.gain{background:var(--bg);padding:clamp(20px,3vw,28px)}
+.gain h3{font-size:1.15rem;color:var(--clay-deep)}
+.gain p{color:var(--muted);font-size:14.5px;margin-top:9px;max-width:44ch}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
@@ -190,7 +197,7 @@ footer{padding-block:34px 46px;color:var(--faint);font-family:"JetBrains Mono";f
 <header class="hero wrap">
   <span class="eyebrow">Proposta di collaborazione</span>
   <h1>Lo Sporting, <em>tutto online.</em></h1>
-  <p class="lede">Un sito nuovo, un'area soci che trasforma il circolo in un gioco, e la stessa cosa come app su iPhone e Android. Un solo sistema, gestito da voi, con prenotazioni e pagamenti sul campo.</p>
+  <p class="lede">Un sito nuovo, un'area soci e l'app su iPhone e Android. Iscrizioni, prenotazioni e pagamenti si gestiscono da soli, i soci tornano a giocare, e il circolo si presenta come una realt&agrave; moderna.</p>
   <div class="hero-cta">
     <a class="btn btn-primary" href="https://reiuz.github.io/sporting-faloppio-demo/" target="_blank" rel="noopener">Guarda la demo dal vivo
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -203,7 +210,7 @@ footer{padding-block:34px 46px;color:var(--faint);font-family:"JetBrains Mono";f
   <div class="sec-head">
     <span class="eyebrow">Cosa realizziamo</span>
     <h2>Tre cose, un solo motore.</h2>
-    <p>Il sito, l'area soci e l'app condividono lo stesso cervello: quello che succede su un campo, sul telefono di un socio e sul sito è sempre lo stesso dato, aggiornato in tempo reale.</p>
+    <p>Sito, area soci e app sono la stessa cosa: una prenotazione fatta dal telefono di un socio si vede subito ovunque, senza doppie agende da tenere allineate a mano.</p>
   </div>
   <div class="builds">
     <div class="build">
@@ -234,6 +241,33 @@ footer{padding-block:34px 46px;color:var(--faint);font-family:"JetBrains Mono";f
         <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Notifiche push: match trovato, sfida, promemoria</li>
         <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Sugli store Apple e Google</li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- COSA CAMBIA PER IL CIRCOLO -->
+<section class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Cosa cambia per il circolo</span>
+    <h2>Meno gestione, pi&ugrave; soci in campo.</h2>
+    <p>Non &egrave; solo un sito nuovo: &egrave; il lavoro di ogni giorno che si semplifica e i soci che giocano di pi&ugrave;.</p>
+  </div>
+  <div class="gains">
+    <div class="gain">
+      <h3>Meno lavoro per lo staff</h3>
+      <p>Iscrizioni, pagamenti, certificati medici e prenotazioni si gestiscono da soli. Niente pi&ugrave; moduli cartacei, bonifici da rincorrere o telefonate per bloccare un campo.</p>
+    </div>
+    <div class="gain">
+      <h3>Incassi automatici, subito sul conto</h3>
+      <p>Corsi e campi si pagano con carta al momento. I soldi arrivano diretti al circolo, senza contanti da contare o pagamenti da inseguire.</p>
+    </div>
+    <div class="gain">
+      <h3>Soci che giocano di pi&ugrave;</h3>
+      <p>Classifica, sfide e premi del D-Match danno un motivo per tornare in campo, e "trova partita" abbina chi cerca un avversario. Pi&ugrave; ore giocate, meno campi vuoti.</p>
+    </div>
+    <div class="gain">
+      <h3>Un circolo al passo coi tempi</h3>
+      <p>Sito nuovo e app sugli store: un motivo in pi&ugrave; per iscriversi qui invece che al campo dietro l'angolo, e per restare negli anni.</p>
     </div>
   </div>
 </section>
@@ -306,19 +340,20 @@ footer{padding-block:34px 46px;color:var(--faint);font-family:"JetBrains Mono";f
 <!-- DETTAGLIO FUNZIONI -->
 <section class="wrap">
   <div class="sec-head">
-    <span class="eyebrow">Le funzioni in dettaglio</span>
-    <h2>Cosa fa, in concreto.</h2>
+    <span class="eyebrow">Nel dettaglio</span>
+    <h2>Cosa fa ogni funzione per voi.</h2>
+    <p>Ogni voce del preventivo, e il vantaggio concreto che porta al circolo.</p>
   </div>
   <div class="detail-list">
-    <div class="detail"><div class="dt">Area soci</div><div class="dd">L'accesso riservato: ogni socio si iscrive, crea il profilo e riceve un livello di gioco, assegnato dal maestro e poi aggiornato in automatico dai risultati delle partite. Gestisce anche il tesseramento (quota socio) e distingue soci da non soci.</div></div>
-    <div class="detail"><div class="dt">Iscrizione corsi e gestione iscritti</div><div class="dd">I genitori iscrivono i figli ai corsi online e pagano subito con carta, senza pi&ugrave; bonifico e IBAN via email. Lo staff ha la dashboard degli iscritti: chi si &egrave; iscritto, a quale corso, chi ha pagato e chi no, con i certificati medici. Sostituisce il modulo e il tracciamento a mano.</div></div>
-    <div class="detail"><div class="dt">Redesign sito vetrina</div><div class="dd">Il sito nuovo, veloce e responsive, con le vostre attivit&agrave;, tariffe e staff reali, in italiano e inglese. La vetrina pubblica del circolo, quella che vedono anche i non soci.</div></div>
-    <div class="detail"><div class="dt">Prenotazione campi</div><div class="dd">Griglia oraria dei campi sempre aggiornata: il socio prenota, invita l'avversario, e lo staff vede tutto in tempo reale. I soci pagano una tariffa agevolata, i non soci di pi&ugrave;.</div></div>
-    <div class="detail"><div class="dt">Statistiche e pannello gestione</div><div class="dd">I numeri del circolo e di ogni socio (ore giocate, vittorie, chi &egrave; pi&ugrave; attivo) e il pannello con cui lo staff gestisce soci, tornei e prenotazioni.</div></div>
-    <div class="detail"><div class="dt">Circuito D-Match</div><div class="dd">Il campionato interno digitale: sfide, classifica e premi di stagione. La classifica usa il punteggio <b>ELO</b>, lo stesso sistema degli scacchi: il punteggio sale quando batti un avversario pi&ugrave; forte e scende quando perdi con uno pi&ugrave; debole, cos&igrave; resta sempre giusto. Trasforma le partite in una gara che tiene i soci sul campo.</div></div>
-    <div class="detail"><div class="dt">Pagamenti (Stripe)</div><div class="dd">Il socio paga la prenotazione online con carta. Gli incassi arrivano diretti sul conto del circolo, senza contanti da gestire a mano.</div></div>
-    <div class="detail"><div class="dt">Trova partita</div><div class="dd">Il socio segna quando vuole giocare e il sistema lo abbina a un avversario del suo livello e con la sua stessa disponibilit&agrave;. Meno telefonate, pi&ugrave; partite.</div></div>
-    <div class="detail"><div class="dt">App e notifiche push</div><div class="dd">La stessa area soci come app su iPhone e Android. Le notifiche push (match trovato, sfida ricevuta, promemoria prenotazione) arrivano dirette sul telefono del socio.</div></div>
+    <div class="detail"><div class="dt">Area soci</div><div class="dd">Ogni socio ha il suo spazio: si iscrive da solo, rinnova la quota e vede il suo livello di gioco, che il maestro assegna e poi si aggiorna da s&eacute; con i risultati. Il circolo ha finalmente l'elenco soci sempre in ordine, senza fogli e rubriche da tenere allineati.</div></div>
+    <div class="detail"><div class="dt">Iscrizione corsi e gestione iscritti</div><div class="dd">I genitori iscrivono i figli e pagano subito con carta: niente pi&ugrave; bonifici e IBAN da mandare via email, n&eacute; ricevute da rincorrere. Lo staff vede a colpo d'occhio chi si &egrave; iscritto, a quale corso, chi ha pagato e chi manca il certificato medico. Ore di segreteria in meno a ogni stagione.</div></div>
+    <div class="detail"><div class="dt">Redesign sito vetrina</div><div class="dd">La prima cosa che vede chi cerca un circolo in zona. Un sito nuovo, veloce e in italiano e inglese, con attivit&agrave;, tariffe e staff reali: pi&ugrave; visite trasformate in iscrizioni, e un biglietto da visita all'altezza del circolo.</div></div>
+    <div class="detail"><div class="dt">Prenotazione campi</div><div class="dd">Il socio prenota dal telefono a qualsiasi ora e invita l'avversario, lo staff non prende pi&ugrave; telefonate e vede la griglia sempre aggiornata. Tariffa agevolata ai soci e piena ai non soci: un motivo in pi&ugrave; per tesserarsi.</div></div>
+    <div class="detail"><div class="dt">Statistiche e pannello gestione</div><div class="dd">Da un unico pannello lo staff gestisce soci, tornei e prenotazioni, e vede i numeri che contano: ore giocate, campi pi&ugrave; usati, soci pi&ugrave; attivi. Decisioni su orari e corsi prese sui dati, non a sensazione.</div></div>
+    <div class="detail"><div class="dt">Circuito D-Match</div><div class="dd">Il motivo per cui i soci tornano a prenotare. Un campionato interno con sfide, classifica e premi di stagione, dove ogni partita conta e la posizione cambia. La classifica usa il punteggio <b>ELO</b> (lo stesso degli scacchi): sale quando batti uno pi&ugrave; forte, scende quando perdi con uno pi&ugrave; debole, cos&igrave; resta sempre giusta e nessuno si tira indietro.</div></div>
+    <div class="detail"><div class="dt">Pagamenti</div><div class="dd">Corsi e campi si pagano con carta al momento, e gli incassi arrivano diretti sul conto del circolo. Meno contanti da gestire, meno pagamenti da inseguire, cassa sempre in ordine.</div></div>
+    <div class="detail"><div class="dt">Trova partita</div><div class="dd">Il socio segna quando vuole giocare e il sistema gli trova un avversario del suo livello e libero negli stessi orari. Chi vuole giocare trova sempre qualcuno, e le ore libere dei campi si riempiono.</div></div>
+    <div class="detail"><div class="dt">App e notifiche push</div><div class="dd">La stessa area soci sul telefono, come app iPhone e Android. Le notifiche (partita trovata, sfida ricevuta, promemoria prenotazione) tengono i soci in contatto col circolo tutta la settimana, non solo quando passano dal campo.</div></div>
   </div>
 </section>
 
@@ -357,15 +392,15 @@ footer{padding-block:34px 46px;color:var(--faint);font-family:"JetBrains Mono";f
 <!-- COME FUNZIONA -->
 <section class="wrap">
   <div class="sec-head">
-    <span class="eyebrow">Come funziona</span>
-    <h2>Costruito per durare e crescere.</h2>
-    <p>Un'unica infrastruttura cloud alimenta web e app. Nessun server da gestire, e regge senza problemi la crescita del circolo.</p>
+    <span class="eyebrow">Senza pensieri</span>
+    <h2>Pensato per non darvi grane.</h2>
+    <p>Cresce insieme al circolo, senza costi a sorpresa e senza nulla da gestire da parte vostra. Voi usate il circolo, al resto pensiamo noi.</p>
   </div>
   <div class="tech">
-    <div class="t"><b>1</b><span>Un solo backend per sito e app: stesso login, stessi dati</span></div>
-    <div class="t"><b>1.000+</b><span>soci gestibili con l'infrastruttura prevista</span></div>
-    <div class="t"><b>0&euro;</b><span>server: tutto su piattaforme cloud gestite</span></div>
-    <div class="t"><b>iOS + Android</b><span>da un unico codice, meno costi di manutenzione</span></div>
+    <div class="t"><b>Tutto collegato</b><span>Sito e app parlano tra loro: un solo accesso, dati sempre allineati</span></div>
+    <div class="t"><b>1.000+</b><span>soci gestiti senza rallentare e senza costare di pi&ugrave;</span></div>
+    <div class="t"><b>Zero sorprese</b><span>Niente server da pagare o mantenere: &egrave; gi&agrave; tutto nel canone</span></div>
+    <div class="t"><b>iPhone + Android</b><span>Un'unica app per tutti i soci, meno da mantenere nel tempo</span></div>
   </div>
 </section>
 
