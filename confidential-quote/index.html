@@ -103,6 +103,13 @@ section{padding-block:clamp(40px,6vw,64px);border-top:1px solid var(--line)}
 .rtag.opt{background:var(--surface-2);color:var(--faint)}
 .ptable td .barr{color:var(--faint);font-family:"JetBrains Mono"}
 .ptable td.inc{color:var(--court);font-weight:700;font-family:"JetBrains Mono"}
+.combo{border:1.7px solid var(--clay);border-radius:16px;padding:14px 20px 18px;background:var(--clay-wash)}
+.combo-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.combo-h .badge{font-family:"JetBrains Mono";font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;background:var(--clay);color:#fff;padding:4px 11px;border-radius:100px}
+.combo-h .save{font-size:14px;color:var(--clay-deep);font-weight:600}
+.combo .ptable td{border-bottom-color:rgba(198,81,43,.18)}
+.combo .ptable tr.sub td{border-top-color:var(--clay-deep)}
+.combo .ptable caption{color:var(--clay-deep)}
 .legend-rows{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px;font-size:13px;color:var(--muted)}
 .legend-rows span{display:inline-flex;align-items:center;gap:7px}
 
@@ -281,6 +288,25 @@ footer{padding-block:34px 46px;color:var(--faint);font-family:"JetBrains Mono";f
           <tr class="tot"><td class="mod">Totale app</td><td class="amt">7.000 &euro;</td></tr>
         </tbody>
       </table>
+    </div>
+    <div class="combo">
+      <div class="combo-h"><span class="badge">Consigliato</span><span class="save">Tutto insieme: 8.500 &euro; invece di 12.000 &euro;</span></div>
+      <div class="ptable-wrap">
+      <table class="ptable">
+        <caption>Web + App completo</caption>
+        <tbody>
+          <tr><td class="mod">App iPhone + Android completa (tutta l'area soci)</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Notifiche push</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Redesign sito vetrina (sito pubblico)</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Iscrizione corsi e gestione iscritti</td><td class="amt inc">&#10003;</td></tr>
+          <tr><td class="mod">Prenotazione campi, D-Match, statistiche, pagamenti, trova partita</td><td class="amt inc">&#10003;</td></tr>
+          <tr class="sub"><td class="mod">Subtotale</td><td class="amt">9.700 &euro;</td></tr>
+          <tr class="disc"><td class="mod">Sconto</td><td class="amt">&minus;1.200 &euro;</td></tr>
+          <tr class="tot"><td class="mod">Totale Web + App</td><td class="amt">8.500 &euro;</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="font-size:13.5px;color:var(--clay-deep);margin-top:4px">L'app fa gi&agrave; tutta l'area soci: prendendo tutto si aggiungono solo il sito pubblico e l'iscrizione corsi, non si paga due volte.</p>
     </div>
   </div>
 </section>
